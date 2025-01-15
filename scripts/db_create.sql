@@ -5,25 +5,25 @@ USE tienda_deporte;
 -- Tabla Cliente
 CREATE TABLE Cliente (
     id_cliente INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(100) NOT NULL,--nombre de usuario
-    password VARCHAR(255) NOT NULL,
-    first_name VARCHAR(100) NOT NULL,--Nombre
-    second_name VARCHAR(100) NOT NULL,--Apellido
-    email VARCHAR(100) UNIQUE NOT NULL,--email
-    direccion TEXT,--direccion no es obligatoria
-    postal VARCHAR(5),--codigo postal no es obligatorio
-    telefono VARCHAR(20),--telefono no es obligatoria
+    username VARCHAR(100) NOT NULL,-- nombre de usuario
+    password VARCHAR(255) NOT NULL,-- Password
+    first_name VARCHAR(100) NOT NULL,-- Nombre
+    second_name VARCHAR(100) NOT NULL,-- Apellido
+    email VARCHAR(100) UNIQUE NOT NULL,--Email
+    direccion TEXT,-- direccion no es obligatoria
+    postal VARCHAR(5),-- codigo postal no es obligatorio
+    telefono VARCHAR(20),-- telefono no es obligatoria
     rol ENUM('usuario', 'administrador') DEFAULT 'usuario',
-    --define una columna que permite clasificar a los usuarios en diferentes categorías (roles) y asigna el rol de 'usuario' como valor por defecto.
-    --Esta columna es fundamental para implementar un sistema de control de acceso y personalizar la experiencia del usuario en tu aplicación.
-    pregunta_seguridad VARCHAR(255),--preguntas
-    respuesta_seguridad VARCHAR(255)--respuestas
+    -- define una columna que permite clasificar a los usuarios en diferentes categorías (roles) y asigna el rol de 'usuario' como valor por defecto.
+    -- Esta columna es fundamental para implementar un sistema de control de acceso y personalizar la experiencia del usuario en tu aplicación.
+    pregunta_seguridad VARCHAR(255),-- preguntas
+    respuesta_seguridad VARCHAR(255)-- respuestas
 );
 
 -- Tabla Categoria
 CREATE TABLE Categoria (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_cat VARCHAR(100) NOT NULL,--Nombre de la categoria
+    nombre_cat VARCHAR(100) NOT NULL,-- Nombre de la categoria
     descripcion TEXT--descripcion de la categoria
 );
 
