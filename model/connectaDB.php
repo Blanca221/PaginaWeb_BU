@@ -15,7 +15,7 @@ class DB {
 				"db_port" => "3306",
 				"db_user" => "root",
 				"db_pass" => "",
-				"db_name" => "tienda_deportiva"
+				"db_name" => "tienda_deporte"
             );
 
 			try {
