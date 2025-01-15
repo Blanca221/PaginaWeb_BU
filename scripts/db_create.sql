@@ -1,6 +1,6 @@
 -- Crear la base de datos
-CREATE DATABASE IF NOT EXISTS tienda_deportiva;
-USE tienda_deportiva;
+CREATE DATABASE IF NOT EXISTS tienda_deporte;
+USE tienda_deporte;
 
 -- Tabla Cliente
 CREATE TABLE Cliente (
@@ -97,11 +97,43 @@ CREATE TABLE token_recuperacion (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+CREATE TABLE IF NOT EXISTS MENSAJES(
+    id_info INT auto_increment,
+    mensaje VARCHAR(255) not null,
+    CONSTRAINT mensajes_pk PRIMARY KEY (id_info)
+);
+
+INSERT INTO MENSAJES (mensaje) VALUES ('Bienvenido a la tienda');
+INSERT INTO MENSAJES (mensaje) VALUES ('Pagina de registro');
+INSERT INTO MENSAJES (mensaje) VALUES ('Has hecho click en el boton');
 
 -- Insertar un usuario administrador de prueba
--- Contraseña: admin123 (deberás hashearla en la aplicación real)
-INSERT INTO Cliente (nombre, apellido, email, contrasena, rol) 
-VALUES ('Admin', 'Sistema', 'admin@tienda.com', '\$2y\$10$YourHashedPasswordHere', 'administrador');
+INSERT INTO Cliente (
+    username, 
+    password, 
+    first_name, 
+    second_name, 
+    email, 
+    direccion, 
+    postal, 
+    telefono, 
+    rol, 
+    pregunta_seguridad, 
+    respuesta_seguridad
+) 
+VALUES (
+    'usuario_prueba', 
+    'password123', 
+    'Juan', 
+    'Pérez', 
+    'juan.perez@example.com', 
+    'Calle Falsa 123', 
+    '12345', 
+    '555-1234', 
+    'usuario', 
+    '¿Cuál es tu color favorito?', 
+    'Azul'
+);
 
 -- Insertar algunas categorías de ejemplo
 INSERT INTO Categoria (nombre_cat, descripcion) VALUES 
