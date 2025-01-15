@@ -7,26 +7,34 @@ $action = $_GET['action'] ?? null;
 switch ($action) {
     
     // Resources
-    
-    case 'pagina-login'://1
-        include __DIR__.'/resource_llistar_categories.php';
+    //pagina de login
+    case 'pagina-login':
+        include __DIR__.'/resource_resource_iniciar_sesion.php';
         break;
-    case 'pagina-registre'://1
+    //pagina de  registro
+    case 'pagina-registre':
          include __DIR__.'/resource_registre.php';
          break;
-    case 'pagina-inicio'://2
-        include __DIR__.'/resource_portada.php';
+    //pagina de producto
+    case 'Pagina-producto':
+        include __DIR__.'/resource_producto.php';
         break;
-    case 'Pagina-producto'://3
-        include __DIR__.'/resource_llistar_categories.php';
-        break;
-    case 'Pagina-administracion'://4
-        include __DIR__.'/resource_llistar_categories.php';
+    //////////////
+    case 'Pagina-administracion':
+        include __DIR__.'/resource_administracion.php';
             break;
-    case 'Pagina-restablecerContraseña'://5
-        include __DIR__.'/resource_llistar_categories.php';
+    case 'Pagina-restablecerPassword':
+        include __DIR__.'/resource_restablecerPassword';
             break;
     
+    //Esta relacionada con la ruta registre
+    case 'registre-session':
+        include __DIR__.'/controller/almacenar_registro.php';
+        break;
+    //Este relacionada con la ruta inicio-sesion
+    case 'inicio-session':
+        include __DIR__.'/controller/iniciar_sesion.php';
+        break;
     /*
      // Resources
     case 'llistar-categories':

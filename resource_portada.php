@@ -7,7 +7,7 @@
 <body>
 
     <div class="container">
-        Portada <br>
+        Este es nuestro pagina de inicio <br>
     </div>
     <!--1.Modifica el "resource_portada", agrega un link para ir al resource "resource_llistar_categories"-->
     <a href="?action=llistar-categories">Ir a listar categorias</a>
