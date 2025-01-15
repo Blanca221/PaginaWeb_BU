@@ -9,7 +9,7 @@ switch ($action) {
     // Resources
     //pagina de login
     case 'pagina-login':
-        include __DIR__.'/resource_resource_iniciar_sesion.php';
+        include __DIR__.'/resource_iniciar_sesion.php';
         break;
     //pagina de  registro
     case 'pagina-registre':

@@ -29,24 +29,46 @@ function registrar($conection, $usuario, $password, $first_name, $second_name, $
 
 //funcion para iniciar session
 function login($conection, $usuario, $password) {
-
     try {
-        $consulta_graus = $conection->prepare("SELECT password FROM USERS WHERE username = ?");//? es un parametro
-        $consulta_graus->bindParam(1, $usuario, PDO::PARAM_STR);//el binparam esta vinculado a este parametro ?
+        // Cambiado a tabla Cliente
+        $consulta_graus = $conection->prepare("SELECT * FROM Cliente WHERE username = ?");
+        $consulta_graus->bindParam(1, $usuario, PDO::PARAM_STR);
         $consulta_graus->execute();
-        $resultat_graus = $consulta_graus->fetchAll(PDO::FETCH_ASSOC);
+        $resultat_graus = $consulta_graus->fetch(PDO::FETCH_ASSOC);
 
-        if (password_verify($password, $resultat_graus[0]['password'])) {//verifica la base de datos
+        if ($resultat_graus && password_verify($password, $resultat_graus['password'])) {
+            // Guardamos los datos importantes en sesión
+            $_SESSION['loggedin'] = true;
+            $_SESSION['id_cliente'] = $resultat_graus['id_cliente'];
+            $_SESSION['username'] = $resultat_graus['username'];
+            $_SESSION['rol'] = $resultat_graus['rol'];
+            
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     } catch(PDOException $e){
         echo "Error: " . $e->getMessage();
+        return false;
     }
+}
 
-    return false;
+// Función para verificar si es administrador
+function esAdmin() {
+    return isset($_SESSION['rol']) && $_SESSION['rol'] === 'administrador';
+}
+
+// Función para verificar si el usuario está logueado
+function estaLogueado() {
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+}
+
+// Función para cerrar sesión
+function cerrarSesion() {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: login.php");
+    exit();
 }
 
 ?>
