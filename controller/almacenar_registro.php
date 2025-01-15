@@ -40,8 +40,11 @@
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['password'] = $_POST['password'];
             $_SESSION['first_name'] = $_POST['first_name'];
+            $_SESSION['second_name'] = $_POST['second_name'];
             $_SESSION['email'] = $_POST['email'];
+            $_SESSION['direccion'] = $_POST['direccion'];
             $_SESSION['postal_code'] = $_POST['postal_code'];
+            $_SESSION['telefono'] = $_POST['telefono'];
             
             //Contraseña hasheada(ejer.8)
 
@@ -49,9 +52,11 @@
             //Conexion a la base de datos
             $conection = DB::getInstance();
             //aqui llama a la funcion de registrar del model usuario.php ESTA LINEA ES LA IMORTANTE
-            $registre = registrar($conection, $_SESSION['username'], $password);
+            $registre = registrar($conection, $_SESSION['username'], $password, $_SESSION['first_name'],$_SESSION['second_name'],$_SESSION['email'],
+                                $_SESSION['direccion'], $_SESSION['postal_code'], $_SESSION['telefono']);
 
             if ($registre) {
+                //nos guarda el mensaje de registro correcto y se lo pasa a la view llistar_registre
                 $mensaje = "Registro correcto";
             } else {
                 $mensaje = "Error en el registr al almacenar en la base de datos.";
@@ -63,6 +68,6 @@
     } else {
         $mensaje = "Error en el registro, faltan campos.";
     }
-    //Llama la vista de llistar registro
+    //Llama la vista de llistar registro y mostrara la variable mensaje.
     include __DIR__ . '/../views/llistar_registre.php';
 ?>

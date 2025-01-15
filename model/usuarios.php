@@ -1,32 +1,33 @@
 <?php
-
-function registrar($conection, $usuario, $password) {
- //[8] (M) Despues de guardar los datos en el $_SESSION crea una sentencia INSERT para guardar SOLO el nombre y la
- //contraseña del usuario en la base de datos.
-
+//funcion pra registrarnos
+function registrar($conection, $usuario, $password, $first_name, $second_name, $email, $direccion, $postal, $telefono) {
     try {
-        // Inicia una transacción
-        //$conection->beginTransaction();
-
-        $consulta_graus = $conection->prepare("INSERT INTO USERS (username, password) VALUES (?, ?)");
-        $consulta_graus->bindValue(1, $usuario, PDO::PARAM_STR);
-        $consulta_graus->bindValue(2, $password, PDO::PARAM_STR);
-        $consulta_graus->execute();
-
-
-        // Confirma la transacción
-        //$conection->commit();
+        // Preparamos la consulta SQL incluyendo todos los campos
+        $consulta = $conection->prepare("INSERT INTO cliente (username, password, first_name, second_name, email, direccion, postal, telefono) 
+                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        
+        // Vinculamos todos los parámetros
+        $consulta->bindValue(1, $usuario, PDO::PARAM_STR);
+        $consulta->bindValue(2, $password, PDO::PARAM_STR);
+        $consulta->bindValue(3, $first_name, PDO::PARAM_STR);
+        $consulta->bindValue(4, $second_name, PDO::PARAM_STR);
+        $consulta->bindValue(5, $email, PDO::PARAM_STR);
+        $consulta->bindValue(6, $direccion, PDO::PARAM_STR);
+        $consulta->bindValue(7, $postal, PDO::PARAM_STR);
+        $consulta->bindValue(8, $telefono, PDO::PARAM_STR);
+        
+        // Ejecutamos la consulta
+        $consulta->execute();
 
         return true;
-    } catch(PDOException $e){
-        // Si hay un error, revierte la transacción
-        $conection->rollBack();
+    } catch(PDOException $e) {
+        // En caso de error, mostramos el mensaje
         echo "Error: " . $e->getMessage();
+        return false;
     }
-
-    return false;
 }
 
+//funcion para iniciar session
 function login($conection, $usuario, $password) {
 
     try {
