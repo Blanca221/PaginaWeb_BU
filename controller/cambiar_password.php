@@ -9,7 +9,7 @@ if(isset($_POST['username_final']) && isset($_POST['new_password'])) {
     
     $conection = DB::getInstance();
     $actualizado = actualizarPassword($conection, $username, $newPassword);
-    
+    //aqui tengo que añadir una view para que muestre un mensaje de actualizacion
     if($actualizado) {
         header('Location: ?action=pagina-login&message=password_updated');
     } else {

@@ -18,7 +18,7 @@
             <input type="password" id="password" name="password"><br>
             <input type="submit" value="Submit">
         </form>
-
+        <a href="?action=Pagina-restablecerPassword">Restablecer contraseña</a>
 </body>
 
 </html>

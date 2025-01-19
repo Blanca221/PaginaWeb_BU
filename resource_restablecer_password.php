@@ -1,14 +1,8 @@
-<!-- resource_restablecer_password.php -->
 <html lang="ca">
 <head>
     <title>Restablecer Contraseña - TDIW</title>
+    <link rel="stylesheet" href="public/css/forms.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        .error { color: red; }
-        .success { color: green; }
-        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
-        .hidden { display: none; }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -16,13 +10,13 @@
         <form id="paso1" action="?action=verificar-seguridad" method="post">
             <h2>Restablecer Contraseña</h2>
             
-            <label for="username">Nombre de usuario:</label><br>
-            <input type="text" id="username" name="username" required><br><br>
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" required>
             
             <div id="pregunta-container" class="hidden">
                 <p id="pregunta-text"></p>
-                <label for="respuesta">Tu respuesta:</label><br>
-                <input type="text" id="respuesta" name="respuesta" required><br><br>
+                <label for="respuesta">Tu respuesta:</label>
+                <input type="text" id="respuesta" name="respuesta" required>
             </div>
             
             <button type="button" id="verificar-usuario">Verificar Usuario</button>
@@ -32,16 +26,18 @@
         <!-- Paso 2: Nueva contraseña (inicialmente oculto) -->
         <form id="paso2" action="?action=cambiar-password" method="post" class="hidden">
             <h2>Nueva Contraseña</h2>
-            <label for="new_password">Nueva contraseña:</label><br>
-            <input type="password" id="new_password" name="new_password" required><br><br>
+            <label for="new_password">Nueva contraseña:</label>
+            <input type="password" id="new_password" name="new_password" required>
             
-            <label for="confirm_password">Confirma la contraseña:</label><br>
-            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+            <label for="confirm_password">Confirma la contraseña:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
             
             <input type="hidden" id="username_final" name="username_final">
             <input type="submit" value="Cambiar contraseña">
         </form>
     </div>
+</body>
+</html>
 
     <script>
     $(document).ready(function(){
