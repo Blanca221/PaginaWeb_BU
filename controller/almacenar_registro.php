@@ -13,61 +13,65 @@
         Pista: utiliza la funcion "filter_var" y "strlen"-->
 
 
-<?php
-    require_once __DIR__ . '/../model/connectaDb.php';
-    require_once __DIR__ . '/../model/usuarios.php';
+        <?php
+require_once __DIR__ . '/../model/connectaDb.php';
+require_once __DIR__ . '/../model/usuarios.php';
 
-     if (isset($_POST['username']) &&
-        isset($_POST['password']) &&
-        isset($_POST['first_name']) &&
-        isset($_POST['email']) &&
-        isset($_POST['postal_code'])
+if (isset($_POST['username']) &&
+    isset($_POST['password']) &&
+    isset($_POST['first_name']) &&
+    isset($_POST['email']) &&
+    isset($_POST['postal_code']) &&
+    isset($_POST['pregunta_seguridad']) &&
+    isset($_POST['respuesta_seguridad'])
+    ) {
+    
+    if ((strlen($_POST['username']) >= 4 &&
+        strlen($_POST['username']) <= 20 &&
+        strlen($_POST['password']) >= 4 &&
+        strlen($_POST['password']) <= 20 &&
+        strlen($_POST['first_name']) >= 4 &&
+        strlen($_POST['first_name']) <= 40 &&
+        filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) &&
+        strlen($_POST['postal_code']) == 5)
         ) {
-        //(validacion ejer.6)
-        if ((strlen($_POST['username']) >= 4 &&//entre 4 y 20 caracteres
-            strlen($_POST['username']) <= 20 &&
-
-            strlen($_POST['password']) >= 4 &&
-            strlen($_POST['password']) <= 20 &&
-
-            strlen($_POST['first_name']) >= 4 &&
-            strlen($_POST['first_name']) <= 40 &&
-
-            filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) &&
-            strlen($_POST['postal_code']) == 5)
-            ) {
-            //almacena las variables envidas del formulario (ejer.5)
-            $_SESSION['username'] = $_POST['username'];
-            $_SESSION['password'] = $_POST['password'];
-            $_SESSION['first_name'] = $_POST['first_name'];
-            $_SESSION['second_name'] = $_POST['second_name'];
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['direccion'] = $_POST['direccion'];
-            $_SESSION['postal_code'] = $_POST['postal_code'];
-            $_SESSION['telefono'] = $_POST['telefono'];
-            
-            //Contraseña hasheada(ejer.8)
-
-            $password = password_hash($_SESSION['password'], PASSWORD_DEFAULT);
-            //Conexion a la base de datos
-            $conection = DB::getInstance();
-            //aqui llama a la funcion de registrar del model usuario.php ESTA LINEA ES LA IMORTANTE
-            $registre = registrar($conection, $_SESSION['username'], $password, $_SESSION['first_name'],$_SESSION['second_name'],$_SESSION['email'],
-                                $_SESSION['direccion'], $_SESSION['postal_code'], $_SESSION['telefono']);
-
-            if ($registre) {
-                //nos guarda el mensaje de registro correcto y se lo pasa a la view llistar_registre
-                $mensaje = "Registro correcto";
-            } else {
-                $mensaje = "Error en el registr al almacenar en la base de datos.";
-            }
-
+        
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['password'] = $_POST['password'];
+        $_SESSION['first_name'] = $_POST['first_name'];
+        $_SESSION['second_name'] = $_POST['second_name'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['direccion'] = $_POST['direccion'];
+        $_SESSION['postal_code'] = $_POST['postal_code'];
+        $_SESSION['telefono'] = $_POST['telefono'];
+        $_SESSION['pregunta_seguridad'] = $_POST['pregunta_seguridad'];
+        $_SESSION['respuesta_seguridad'] = $_POST['respuesta_seguridad'];
+        
+        $password = password_hash($_SESSION['password'], PASSWORD_DEFAULT);
+        
+        $conection = DB::getInstance();
+        $registre = registrar($conection, 
+            $_SESSION['username'], 
+            $password, 
+            $_SESSION['first_name'],
+            $_SESSION['second_name'],
+            $_SESSION['email'],
+            $_SESSION['direccion'], 
+            $_SESSION['postal_code'], 
+            $_SESSION['telefono'],
+            $_SESSION['pregunta_seguridad'] ?? null,
+            $_SESSION['respuesta_seguridad'] ?? null
+        );
+        if ($registre) {
+            $mensaje = "Registro correcto";
         } else {
-            $mensaje = "Error en el registro, los campos no cumple los requisitos.";
+            $mensaje = "Error en el registro al almacenar en la base de datos.";
         }
     } else {
-        $mensaje = "Error en el registro, faltan campos.";
+        $mensaje = "Error en el registro, los campos no cumplen los requisitos.";
     }
-    //Llama la vista de llistar registro y mostrara la variable mensaje.
-    include __DIR__ . '/../views/llistar_registre.php';
-?>
+} else {
+    $mensaje = "Error en el registro, faltan campos.";
+}
+
+include __DIR__ . '/../views/llistar_registre.php';

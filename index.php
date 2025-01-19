@@ -19,18 +19,32 @@ switch ($action) {
     case 'Pagina-producto':
         include __DIR__.'/resource_producto.php';
         break;
-    //////////////
+    //NO lo e hecho aun
     case 'Pagina-administracion':
         include __DIR__.'/resource_administracion.php';
             break;
+    //resource para restablecer la contraseña y los controladores
     case 'Pagina-restablecerPassword':
-        include __DIR__.'/resource_restablecerPassword';
-            break;
+        include __DIR__.'/resource_restablecer_password.php';
+        break;
+    case 'obtener-pregunta':
+        include __DIR__.'/controller/obtener_pregunta.php';
+        break;
+    case 'verificar-seguridad':
+        include __DIR__.'/controller/verificar_seguridad.php';
+        break;
+    case 'cambiar-password':
+        include __DIR__.'/controller/cambiar_password.php';
+        break;
     
     //Esta relacionada con la ruta registre
     case 'registre-session':
         include __DIR__.'/controller/almacenar_registro.php';
         break;
+    //Esta ruta al controlador revisa el mail que no este en uso
+    case 'check-email':
+        include __DIR__.'/controller/check_email.php';
+         break;
     //Este relacionada con la ruta inicio-sesion
     case 'inicio-session':
         include __DIR__.'/controller/iniciar_sesion.php';

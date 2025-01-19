@@ -1,12 +1,12 @@
 <?php
 //funcion pra registrarnos
-function registrar($conection, $usuario, $password, $first_name, $second_name, $email, $direccion, $postal, $telefono) {
+function registrar($conection, $usuario, $password, $first_name, $second_name, $email, $direccion, $postal, $telefono, $pregunta_seguridad = null, $respuesta_seguridad = null) {
     try {
-        // Preparamos la consulta SQL incluyendo todos los campos
-        $consulta = $conection->prepare("INSERT INTO cliente (username, password, first_name, second_name, email, direccion, postal, telefono) 
-                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        // Preparamos la consulta SQL incluyendo todos los campos necesarios
+        $consulta = $conection->prepare("INSERT INTO Cliente (username, password, first_name, second_name, email, direccion, postal, telefono, rol, pregunta_seguridad, respuesta_seguridad) 
+                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'usuario', ?, ?)");
         
-        // Vinculamos todos los parámetros
+        // Vinculamos los parámetros en el mismo orden que aparecen en la consulta
         $consulta->bindValue(1, $usuario, PDO::PARAM_STR);
         $consulta->bindValue(2, $password, PDO::PARAM_STR);
         $consulta->bindValue(3, $first_name, PDO::PARAM_STR);
@@ -15,6 +15,8 @@ function registrar($conection, $usuario, $password, $first_name, $second_name, $
         $consulta->bindValue(6, $direccion, PDO::PARAM_STR);
         $consulta->bindValue(7, $postal, PDO::PARAM_STR);
         $consulta->bindValue(8, $telefono, PDO::PARAM_STR);
+        $consulta->bindValue(9, $pregunta_seguridad, PDO::PARAM_STR);
+        $consulta->bindValue(10, $respuesta_seguridad, PDO::PARAM_STR);
         
         // Ejecutamos la consulta
         $consulta->execute();
