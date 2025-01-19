@@ -73,4 +73,41 @@ function cerrarSesion() {
     exit();
 }
 
+//Funciones para restablecer la contraseña del Usuario
+function obtenerPreguntaSeguridad($conection, $username) {
+    try {
+        $consulta = $conection->prepare("SELECT pregunta_seguridad FROM Cliente WHERE username = ?");
+        $consulta->bindParam(1, $username, PDO::PARAM_STR);
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        return false;
+    }
+}
+
+function verificarRespuestaSeguridad($conection, $username, $respuesta) {
+    try {
+        $consulta = $conection->prepare("SELECT id_cliente FROM Cliente WHERE username = ? AND respuesta_seguridad = ?");
+        $consulta->bindParam(1, $username, PDO::PARAM_STR);
+        $consulta->bindParam(2, $respuesta, PDO::PARAM_STR);
+        $consulta->execute();
+        return $consulta->fetch() ? true : false;
+    } catch(PDOException $e) {
+        return false;
+    }
+}
+
+function actualizarPassword($conection, $username, $newPassword) {
+    try {
+        $password_hash = password_hash($newPassword, PASSWORD_DEFAULT);
+        $consulta = $conection->prepare("UPDATE Cliente SET password = ? WHERE username = ?");
+        $consulta->bindParam(1, $password_hash, PDO::PARAM_STR);
+        $consulta->bindParam(2, $username, PDO::PARAM_STR);
+        return $consulta->execute();
+    } catch(PDOException $e) {
+        return false;
+    }
+}
+
+
 ?>

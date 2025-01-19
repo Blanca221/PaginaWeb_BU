@@ -1,0 +1,18 @@
+
+<?php
+require_once __DIR__ . '/../model/connectaDb.php';
+require_once __DIR__ . '/../model/usuarios.php';
+
+if(isset($_POST['username_final']) && isset($_POST['new_password'])) {
+    $username = filter_var($_POST['username_final'], FILTER_SANITIZE_STRING);
+    $newPassword = $_POST['new_password'];
+    
+    $conection = DB::getInstance();
+    $actualizado = actualizarPassword($conection, $username, $newPassword);
+    
+    if($actualizado) {
+        header('Location: ?action=pagina-login&message=password_updated');
+    } else {
+        header('Location: ?action=Pagina-restablecerPassword&error=1');
+    }
+}
