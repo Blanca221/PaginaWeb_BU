@@ -140,3 +140,8 @@ INSERT INTO Categoria (nombre_cat, descripcion) VALUES
 ('Zapatillas', 'Todo tipo de calzado deportivo'),
 ('Ropa Deportiva', 'Camisetas, pantalones y más'),
 ('Accesorios', 'Complementos deportivos');
+
+-- Insert de categoria zapatilla
+INSERT INTO `producto` (`id_producto`, `nombre_producto`, `descripcion`, `precio`, `stock`, `id_categoria`, `color`, `talla`, `imagen_url`, `fecha`, `estado`) VALUES
+(1, 'Adidas Campus Amarillas', 'Zapatillas deportivas de la marca Adidas, modelo Campus en color amarillo.', 59.99, 50, 1, 'Amarillo', '42', 'ZAPATOS/ADIDAS CAMPUS AMARILLAS/1.png\r\n', '2025-01-20', 'activo'),
+(2, 'Adidas Campus Grises', 'Zapatillas deportivas de la marca Adidas, modelo Campus en color gris.', 59.99, 50, 1, 'Gris', '42', 'ZAPATOS/ADIDAS CAMPUS GRISES/1.png\r\n', '2025-01-20', 'activo');
