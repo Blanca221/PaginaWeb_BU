@@ -7,9 +7,7 @@ require_once __DIR__ . '/../model/productos.php';
 
 $conection = DB::getInstance();
 
-$categoria = $_GET['categoria'] ?? 1;
-
-$productos = getProductsByCategory($conection, $categoria);
+$productos = getAllProducts($conection);
 
 include __DIR__ . '/../views/llistar_productos.php';
 

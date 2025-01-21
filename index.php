@@ -17,8 +17,13 @@ switch ($action) {
          break;
     //pagina de producto
     case 'Pagina-producto':
-        include __DIR__.'/resource_producto.php';
+        include __DIR__.'/resource_productos.php';
         break;
+
+    case 'pagina-productos':
+        include __DIR__.'/resource_productos.php';
+        break;
+        
     //NO lo e hecho aun
     case 'Pagina-administracion':
         include __DIR__.'/resource_administracion.php';
