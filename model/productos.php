@@ -27,4 +27,17 @@ function getAllProducts($conection) {
     return $resultat;
 }
 
+//funcion para obtener todos los productos activos
+function obtenerProductos($conection) {
+    try {
+        $consulta = $conection->prepare("SELECT * FROM producto WHERE estado = 'activo'");
+        $consulta->execute();
+        $resultat = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    
+    return $resultat;
+}
+
 ?>
