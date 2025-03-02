@@ -3,6 +3,16 @@
 
 -->
 <?php
+/**
+ * Controlador para el inicio de sesión
+ * 
+ * Este controlador maneja la autenticación de usuarios,
+ * verificando las credenciales y estableciendo la sesión.
+ * 
+ * @requires ../model/connectaDb.php
+ * @requires ../model/usuarios.php
+ */
+
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/usuarios.php';
 

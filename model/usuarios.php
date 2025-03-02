@@ -1,5 +1,28 @@
 <?php
+/**
+ * Funciones para la gestión de usuarios
+ * 
+ * Este archivo contiene todas las funciones relacionadas con la gestión de usuarios,
+ * incluyendo registro, login, verificación de roles y gestión de contraseñas.
+ */
+
 //funcion pra registrarnos
+/**
+ * Registra un nuevo usuario en la base de datos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param string $usuario Nombre de usuario
+ * @param string $password Contraseña hasheada del usuario
+ * @param string $first_name Nombre del usuario
+ * @param string|null $second_name Apellido del usuario
+ * @param string $email Correo electrónico
+ * @param string $direccion Dirección postal
+ * @param string $postal Código postal
+ * @param string $telefono Número de teléfono
+ * @param string|null $pregunta_seguridad Pregunta de seguridad
+ * @param string|null $respuesta_seguridad Respuesta a la pregunta de seguridad
+ * @return bool True si el registro fue exitoso, False en caso contrario
+ */
 function registrar($conection, $usuario, $password, $first_name, $second_name, $email, $direccion, $postal, $telefono, $pregunta_seguridad = null, $respuesta_seguridad = null) {
     try {
         // Preparamos la consulta SQL incluyendo todos los campos necesarios
@@ -30,6 +53,14 @@ function registrar($conection, $usuario, $password, $first_name, $second_name, $
 }
 
 //funcion para iniciar session
+/**
+ * Verifica las credenciales del usuario e inicia sesión
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param string $usuario Nombre de usuario
+ * @param string $password Contraseña sin hashear
+ * @return bool True si el login fue exitoso, False en caso contrario
+ */
 function login($conection, $usuario, $password) {
     try {
         // Cambiado a tabla Cliente
@@ -56,16 +87,31 @@ function login($conection, $usuario, $password) {
 }
 
 // Función para verificar si es administrador
+/**
+ * Verifica si el usuario actual tiene rol de administrador
+ *
+ * @return bool True si es administrador, False en caso contrario
+ */
 function esAdmin() {
     return isset($_SESSION['rol']) && $_SESSION['rol'] === 'administrador';
 }
 
 // Función para verificar si el usuario está logueado
+/**
+ * Verifica si hay una sesión activa de usuario
+ *
+ * @return bool True si el usuario está logueado, False en caso contrario
+ */
 function estaLogueado() {
     return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 }
 
 // Función para cerrar sesión
+/**
+ * Cierra la sesión actual del usuario y redirecciona al login
+ *
+ * @return void
+ */
 function cerrarSesion() {
     $_SESSION = array();
     session_destroy();
@@ -74,6 +120,13 @@ function cerrarSesion() {
 }
 
 //Funciones para restablecer la contraseña del Usuario
+/**
+ * Obtiene la pregunta de seguridad de un usuario
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param string $username Nombre de usuario
+ * @return array|false Array con la pregunta de seguridad o False si hay error
+ */
 function obtenerPreguntaSeguridad($conection, $username) {
     try {
         $consulta = $conection->prepare("SELECT pregunta_seguridad FROM Cliente WHERE username = ?");
@@ -85,6 +138,14 @@ function obtenerPreguntaSeguridad($conection, $username) {
     }
 }
 
+/**
+ * Verifica si la respuesta de seguridad proporcionada es correcta
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param string $username Nombre de usuario
+ * @param string $respuesta Respuesta proporcionada
+ * @return bool True si la respuesta es correcta, False en caso contrario
+ */
 function verificarRespuestaSeguridad($conection, $username, $respuesta) {
     try {
         $consulta = $conection->prepare("SELECT id_cliente FROM Cliente WHERE username = ? AND respuesta_seguridad = ?");
@@ -97,6 +158,14 @@ function verificarRespuestaSeguridad($conection, $username, $respuesta) {
     }
 }
 
+/**
+ * Actualiza la contraseña de un usuario
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param string $username Nombre de usuario
+ * @param string $newPassword Nueva contraseña sin hashear
+ * @return bool True si la actualización fue exitosa, False en caso contrario
+ */
 function actualizarPassword($conection, $username, $newPassword) {
     try {
         $password_hash = password_hash($newPassword, PASSWORD_DEFAULT);

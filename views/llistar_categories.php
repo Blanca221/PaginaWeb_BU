@@ -1,3 +1,9 @@
+/**
+ * Vista para mostrar el listado de categorías
+ * 
+ * @var array $categories Array de categorías con sus nombres y descripciones
+ */
+
 <ul>
     <?php foreach ($categories as $categoria) : //ejercicio 3?>
         <li>

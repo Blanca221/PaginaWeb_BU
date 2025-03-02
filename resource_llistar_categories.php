@@ -1,3 +1,10 @@
+/**
+ * Página principal para el listado de categorías
+ * 
+ * Esta página incluye la estructura HTML básica y carga
+ * el controlador correspondiente para mostrar las categorías.
+ */
+
 <html lang="ca">
 
 <head>

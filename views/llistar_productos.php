@@ -1,3 +1,14 @@
+/**
+ * Vista para mostrar el listado de productos
+ * 
+ * Esta vista muestra una lista de productos con sus detalles:
+ * - ID del producto
+ * - Nombre del producto
+ * - Imagen del producto
+ * - URL de la imagen
+ * 
+ * @var array $productos Array de productos con toda su información
+ */
 <ul>
     <?php foreach ($productos as $producto) : ?>
         <li>
@@ -7,4 +18,4 @@
             <p> <?php echo$producto['imagen_url'] ?></p>
         </li>
     <?php endforeach; ?>
-</u++l>
+</ul>

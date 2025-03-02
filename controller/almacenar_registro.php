@@ -1,21 +1,28 @@
+/**
+ * Script para procesar y almacenar el registro de usuarios
+ * 
+ * Este script maneja el proceso de registro de usuarios, validando los datos
+ * del formulario y almacenándolos en la base de datos.
+ * 
+ * @requires ../model/connectaDb.php
+ * @requires ../model/usuarios.php
+ */
 
-<!--[5] (M) Guarda en $_SESSION todos los datos del registro, al hacer clic en el boton "Enviar" (Sin ajax)
-        Una vez guardados, muestra una pagina de que los datos se han guardado correctamente y los datos introducidos.-->
-
-<!--6.Crea una validacion de servidor antes de guardar los datos en $_SESSION igual que la validacion del cliente.
-        Los campos tienen que cumplir los siguientes requisitos.
-                username: debe tener entre 4 y 20 caracteres
-                password: debe tener entre 4 y 20 caracteres
-                first_name: debe tener entre 4 y 40 caracteres
-                email: debe tener un formato de email
-                postal: debe tener 5 catacteres !!numericos!!
-                "TODOS": deben ser obligatorio.
-        Pista: utiliza la funcion "filter_var" y "strlen"-->
-
-
-        <?php
+<?php
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/usuarios.php';
+
+/**
+ * Validación y procesamiento de datos del formulario de registro
+ * 
+ * Comprueba que todos los campos requeridos estén presentes y cumplan
+ * con los criterios de validación:
+ * - Username: 4-20 caracteres
+ * - Password: 4-20 caracteres
+ * - Nombre: 4-40 caracteres
+ * - Email: formato válido
+ * - Código postal: 5 caracteres
+ */
 
 if (isset($_POST['username']) &&
     isset($_POST['password']) &&
@@ -74,4 +81,19 @@ if (isset($_POST['username']) &&
     $mensaje = "Error en el registro, faltan campos.";
 }
 
+/**
+ * Almacenamiento de datos en la sesión y base de datos
+ * 
+ * Si la validación es exitosa:
+ * 1. Almacena los datos en la sesión
+ * 2. Hashea la contraseña
+ * 3. Intenta registrar al usuario en la base de datos
+ * 4. Establece un mensaje de éxito o error según el resultado
+ */
+
+/**
+ * Inclusión de la vista
+ * 
+ * @see ../views/llistar_registre.php Para la presentación del resultado
+ */
 include __DIR__ . '/../views/llistar_registre.php';

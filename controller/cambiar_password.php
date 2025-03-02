@@ -1,5 +1,14 @@
-
 <?php
+/**
+ * Controlador para el cambio de contraseña
+ * 
+ * Este controlador procesa la solicitud de cambio de contraseña,
+ * verifica los datos recibidos y actualiza la contraseña del usuario.
+ * 
+ * @requires ../model/connectaDb.php
+ * @requires ../model/usuarios.php
+ */
+
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/usuarios.php';
 

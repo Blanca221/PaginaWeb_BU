@@ -1,4 +1,10 @@
 <?php
+/**
+ * Funciones para la gestión de productos
+ * 
+ * Este archivo contiene todas las funciones relacionadas con la gestión
+ * de productos, incluyendo consultas por categoría y listados generales.
+ */
 
 function getProductsByCategory($conection, $categoria) { // Antiguo no usar tal cual (modificar)
 
@@ -14,6 +20,13 @@ function getProductsByCategory($conection, $categoria) { // Antiguo no usar tal 
     return $resultat;
 }
 
+/**
+ * Obtiene todos los productos de la base de datos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @return array Lista de todos los productos
+ * @throws PDOException Si hay un error en la consulta
+ */
 function getAllProducts($conection) {
 
     try {
@@ -27,7 +40,13 @@ function getAllProducts($conection) {
     return $resultat;
 }
 
-//funcion para obtener todos los productos activos
+/**
+ * Obtiene todos los productos activos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @return array Lista de productos con estado 'activo'
+ * @throws PDOException Si hay un error en la consulta
+ */
 function obtenerProductos($conection) {
     try {
         $consulta = $conection->prepare("SELECT * FROM producto WHERE estado = 'activo'");

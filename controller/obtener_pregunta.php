@@ -1,5 +1,14 @@
-
 <?php
+/**
+ * Controlador para obtener la pregunta de seguridad
+ * 
+ * Este controlador obtiene la pregunta de seguridad asociada
+ * a un nombre de usuario específico.
+ * 
+ * @requires ../model/connectaDb.php
+ * @requires ../model/usuarios.php
+ */
+
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/usuarios.php';
 

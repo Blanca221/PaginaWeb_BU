@@ -1,5 +1,18 @@
 <?php
-//Ejercicio resuelto y Ejercicio3
+/**
+ * Funciones para la gestión de categorías
+ * 
+ * Este archivo contiene las funciones relacionadas con la obtención
+ * y gestión de categorías de productos.
+ */
+
+/**
+ * Obtiene todas las categorías de la base de datos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @return array Lista de categorías con su nombre y descripción
+ * @throws PDOException Si hay un error en la consulta
+ */
 function getCategories($conection) {
 
     try {

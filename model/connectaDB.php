@@ -1,11 +1,27 @@
 <?php
-
+/**
+ * Clase para gestionar la conexión a la base de datos mediante el patrón Singleton
+ * 
+ * Esta clase proporciona una única instancia de conexión a la base de datos
+ * utilizando PDO para MySQL.
+ */
 class DB {
-
+	/**
+	 * @var PDO|null Instancia única de la conexión a la base de datos
+	 */
 	protected static $instance;
 
+	/**
+	 * Constructor protegido para evitar la creación directa de objetos
+	 */
 	protected function __construct() {}
 
+	/**
+	 * Obtiene la instancia única de la conexión a la base de datos
+	 * 
+	 * @return PDO Instancia de la conexión a la base de datos
+	 * @throws PDOException Si hay un error en la conexión
+	 */
 	public static function getInstance() {
 
 		if(empty(self::$instance)) {

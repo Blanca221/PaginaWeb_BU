@@ -1,3 +1,12 @@
+/**
+ * Página de visualización de productos
+ * 
+ * Esta página muestra el catálogo de productos utilizando una cuadrícula
+ * responsive y estilos CSS personalizados.
+ * 
+ * @requires controller/productos_controller.php
+ */
+
 <html lang="ca">
 
 <head>

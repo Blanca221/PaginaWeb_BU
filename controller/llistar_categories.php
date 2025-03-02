@@ -1,5 +1,14 @@
 <?php
-//Ejercicio 3
+/**
+ * Controlador para el listado de categorías
+ * 
+ * Este controlador se encarga de obtener todas las categorías
+ * de la base de datos y pasarlas a la vista correspondiente.
+ * 
+ * @requires ../model/connectaDb.php
+ * @requires ../model/categories.php
+ */
+
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/categories.php';
 

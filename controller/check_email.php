@@ -1,7 +1,20 @@
-
 <?php
+/**
+ * Controlador para verificar la disponibilidad de email
+ * 
+ * Este controlador verifica si un email ya está registrado en la base de datos.
+ * 
+ * @requires ../model/connectaDb.php
+ */
+
 require_once __DIR__ . '/../model/connectaDb.php';
 
+/**
+ * Verifica si un email ya existe en la base de datos
+ *
+ * @param string $email Email a verificar
+ * @return string 'exists' si el email existe, 'available' si está disponible, 'error' en caso de error
+ */
 function checkEmail($email) {
     try {
         $conection = DB::getInstance();

@@ -1,5 +1,14 @@
-
 <?php
+/**
+ * Controlador para verificar la respuesta de seguridad
+ * 
+ * Este controlador verifica si la respuesta de seguridad proporcionada
+ * por el usuario coincide con la almacenada en la base de datos.
+ * 
+ * @requires ../model/connectaDb.php
+ * @requires ../model/usuarios.php
+ */
+
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/usuarios.php';
 

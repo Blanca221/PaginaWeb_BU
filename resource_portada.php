@@ -1,3 +1,12 @@
+/**
+ * Página principal de la aplicación
+ * 
+ * Esta página muestra la portada del sitio web, incluyendo:
+ * - Enlaces a otras secciones
+ * - Mensaje de bienvenida
+ * - Integración con el controlador de mensajes
+ */
+
 <html lang="ca">
 
 <head>

@@ -1,5 +1,19 @@
 <?php
-//Ejercicio2
+/**
+ * Funciones para la gestión de mensajes del sistema
+ * 
+ * Este archivo contiene las funciones relacionadas con la obtención
+ * de mensajes del sistema desde la base de datos.
+ */
+
+/**
+ * Obtiene un mensaje específico de la base de datos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param int $id_info Identificador del mensaje
+ * @return array Retorna el mensaje encontrado
+ * @throws PDOException Si hay un error en la consulta
+ */
 function getMensaje($conection, $id_info) {
 
     try {
