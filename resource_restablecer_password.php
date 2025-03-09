@@ -1,17 +1,3 @@
-/**
- * Página de restablecimiento de contraseña
- * 
- * Esta página implementa un proceso de dos pasos para restablecer la contraseña:
- * 1. Verificación de usuario y pregunta de seguridad
- * 2. Establecimiento de nueva contraseña
- * 
- * Utiliza jQuery para manejar las interacciones AJAX con el servidor
- * y validaciones del formulario en el lado del cliente.
- * 
- * @requires jQuery 3.5.1
- * @requires public/css/forms.css
- */
-
 <html lang="ca">
 <head>
     <title>Restablecer Contraseña - TDIW</title>
@@ -19,6 +5,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <!-- /**
+        * Página de restablecimiento de contraseña
+        * 
+        * Esta página implementa un proceso de dos pasos para restablecer la contraseña:
+        * 1. Verificación de usuario y pregunta de seguridad
+        * 2. Establecimiento de nueva contraseña
+        * 
+        * Utiliza jQuery para manejar las interacciones AJAX con el servidor
+        * y validaciones del formulario en el lado del cliente.
+        * 
+        * @requires jQuery 3.5.1
+        * @requires public/css/forms.css
+        */ -->
     <div class="container">
         <!-- Paso 1: Username y pregunta de seguridad -->
         <form id="paso1" action="?action=verificar-seguridad" method="post">

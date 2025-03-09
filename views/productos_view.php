@@ -1,13 +1,14 @@
-/**
- * Vista para mostrar la cuadrícula de productos
- * 
- * Esta vista muestra los productos en un formato de cuadrícula
- * con imágenes y detalles de cada producto.
- * 
- * @var array $productos Array de productos con toda su información
- */
+
 
 <div class="productos-grid">
+    <!-- /**
+        * Vista para mostrar la cuadrícula de productos
+        * 
+        * Esta vista muestra los productos en un formato de cuadrícula
+        * con imágenes y detalles de cada producto.
+        * 
+        * @var array $productos Array de productos con toda su información
+        */ -->
     <?php foreach($productos as $producto): ?>
         <div class="producto-card">
             <img class="producto-imagen" 

@@ -1,16 +1,3 @@
-/**
- * Página de registro de usuarios
- * 
- * Esta página proporciona un formulario completo para el registro de usuarios con:
- * - Validación en tiempo real del email mediante AJAX
- * - Validación de campos en el lado del cliente
- * - Preguntas de seguridad para recuperación de cuenta
- * - Mensajes de feedback para el usuario
- * 
- * @requires jQuery 3.5.1
- * @requires controller/llistar_mensaje_registre.php
- */
-
 <html lang="ca">
 <head>
     <title>Registre - TDIW</title>
@@ -21,6 +8,18 @@
     </style>
 </head>
 <body>
+    <!-- /**
+        * Página de registro de usuarios
+        * 
+        * Esta página proporciona un formulario completo para el registro de usuarios con:
+        * - Validación en tiempo real del email mediante AJAX
+        * - Validación de campos en el lado del cliente
+        * - Preguntas de seguridad para recuperación de cuenta
+        * - Mensajes de feedback para el usuario
+        * 
+        * @requires jQuery 3.5.1
+        * @requires controller/llistar_mensaje_registre.php
+        */-->
     <?php require __DIR__ . '/controller/llistar_mensaje_registre.php'; ?>
 
     <div class="container">
