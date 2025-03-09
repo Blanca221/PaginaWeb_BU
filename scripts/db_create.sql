@@ -145,3 +145,78 @@ INSERT INTO Categoria (nombre_cat, descripcion) VALUES
 INSERT INTO `producto` (`id_producto`, `nombre_producto`, `descripcion`, `precio`, `stock`, `id_categoria`, `color`, `talla`, `imagen_url`, `fecha`, `estado`) VALUES
 (1, 'Adidas Campus Amarillas', 'Zapatillas deportivas de la marca Adidas, modelo Campus en color amarillo.', 59.99, 50, 1, 'Amarillo', '42', 'ZAPATOS/ADIDAS CAMPUS AMARILLAS/1.png\r\n', '2025-01-20', 'activo'),
 (2, 'Adidas Campus Grises', 'Zapatillas deportivas de la marca Adidas, modelo Campus en color gris.', 59.99, 50, 1, 'Gris', '42', 'ZAPATOS/ADIDAS CAMPUS GRISES/1.png\r\n', '2025-01-20', 'activo');
+
+-- Cambios en la base de datos
+-- Tabla Producto_Imagenes para almacenar las imagenes de los productos
+CREATE TABLE Producto_Imagenes (
+    id_imagen INT PRIMARY KEY AUTO_INCREMENT,
+    id_producto INT,
+    url_imagen VARCHAR(255) NOT NULL,
+    es_principal BOOLEAN DEFAULT FALSE,
+    orden INT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+        ON DELETE CASCADE
+);
+--Eliminar la columna imagen_url de la tabla Producto hay que eliminar esta columna de la tabla producto
+
+ALTER TABLE Producto DROP COLUMN imagen_url;
+
+-- Categoria de marca
+CREATE TABLE Marca (
+    id_marca INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_marca VARCHAR(100) NOT NULL,
+    logo_url VARCHAR(255),
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo'
+);
+
+-- Insertar las 4 marcas principales
+INSERT INTO Marca (nombre_marca) VALUES
+('Nike'),
+('adidas'),
+('New Balance'),
+('Puma');
+
+-- 1. Primero insertamos el producto Adidas Campus Amarillas
+INSERT INTO Producto (
+    nombre_producto, 
+    descripcion, 
+    precio, 
+    stock, 
+    id_categoria,
+    id_marca, 
+    color, 
+    talla,
+    estado
+) VALUES (
+    'Adidas Campus Amarillas',
+    'Zapatillas deportivas Adidas Campus en color amarillo, perfectas para un estilo casual y deportivo',
+    59.99,
+    50,
+    1,  -- id_categoria (Zapatillas)
+    2,  -- id_marca (Adidas)
+    'Amarillo',
+    '42',
+    'activo'
+);
+--  Verifica la ruta en  la tabla productos_imagnes antes dePara el producto 2
+INSERT INTO Producto_Imagenes (id_producto, url_imagen, es_principal, orden)
+SELECT 
+    2, -- id_producto cambiado a 2
+    'images/productos/adidas/zapatillas/campus-grises/1.jpg', -- ruta actualizada para el nuevo producto
+    TRUE,
+    1
+WHERE EXISTS (
+    SELECT 1 
+    FROM Producto 
+    WHERE id_producto = 2  -- también cambiado a 2
+);
+
+-- Verificar que se guardó
+SELECT url_imagen FROM Producto_Imagenes WHERE id_producto = 2;
+
+--Luego insertamos las imagenes  secundarias  despues de probar la rutadel producto 2
+--(@ultimo_id, 'images/productos/adidas/zapatillas/campus-grises/1.jpg', TRUE, 1)
+INSERT INTO Producto_Imagenes (id_producto, url_imagen, es_principal, orden) VALUES
+(2, 'imagenes/productos/adidas/zapatillas/campus-amarillas/2.png', FALSE, 2),
+(2, 'imagenes/productos/adidas/zapatillas/campus-amarillas/3.png', FALSE, 3);

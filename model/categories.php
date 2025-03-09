@@ -16,7 +16,7 @@
 function getCategories($conection) {
 
     try {
-        $consulta_graus = $conection->prepare("SELECT nombre, descripcion FROM CATEGORY");
+        $consulta_graus = $conection->prepare("SELECT nombre_cat, descripcion FROM categoria");
         $consulta_graus->execute();
         $resultat_graus = $consulta_graus->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){

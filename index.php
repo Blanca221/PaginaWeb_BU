@@ -16,12 +16,13 @@ switch ($action) {
          include __DIR__.'/resource_registre.php';
          break;
     //pagina de producto
-    case 'Pagina-producto':
-        include __DIR__.'/resource_productos.php';
-        break;
-
+   
     case 'pagina-productos':
         include __DIR__.'/resource_productos.php';
+        break;
+    // Resources
+     case 'llistar-categories':
+        include __DIR__.'/resource_llistar_categories.php';
         break;
         
     //NO lo e hecho aun
