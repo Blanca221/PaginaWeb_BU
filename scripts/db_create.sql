@@ -212,7 +212,7 @@ INSERT INTO Producto (
 INSERT INTO Producto_Imagenes (id_producto, url_imagen, es_principal, orden)
 SELECT 
     2, -- id_producto cambiado a 2
-    'imageness/productos/adidas/zapatillas/campus-grises/1.png', -- ruta actualizada para el nuevo producto
+    'imagenes/productos/adidas/zapatillas/campus-grises/1.png', -- ruta actualizada para el nuevo producto
     TRUE,
     1
 WHERE EXISTS (
