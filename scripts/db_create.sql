@@ -237,3 +237,6 @@ WHERE EXISTS (
 -- 3.Verificar que se guardó
 SELECT url_imagen FROM Producto_Imagenes WHERE id_producto = 2;
 
+-- contenido del home
+INSERT INTO Home_Content (tipo, titulo, subtitulo, url_imagen, url_enlace, orden, estado) VALUES
+('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal1.png', '/PaginaWeb_BU/resource_productos.php', 1, 'activo');
