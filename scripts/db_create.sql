@@ -237,6 +237,27 @@ WHERE EXISTS (
 -- 3.Verificar que se guardó
 SELECT url_imagen FROM Producto_Imagenes WHERE id_producto = 2;
 
+-- Tabla para el contenido del home
+CREATE TABLE Home_Content (
+    id_content INT PRIMARY KEY AUTO_INCREMENT,
+    tipo ENUM('hero', 'banner', 'promocion') NOT NULL,
+    titulo VARCHAR(255),
+    subtitulo VARCHAR(255),
+    descripcion TEXT,
+    url_imagen VARCHAR(255) NOT NULL,
+    url_enlace VARCHAR(255),
+    orden INT NOT NULL,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    fecha_inicio DATE,
+    fecha_fin DATE
+);
+
 -- contenido del home
 INSERT INTO Home_Content (tipo, titulo, subtitulo, url_imagen, url_enlace, orden, estado) VALUES
 ('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal1.png', '/PaginaWeb_BU/resource_productos.php', 1, 'activo');
+
+INSERT INTO Home_Content (tipo, titulo, subtitulo, url_imagen, url_enlace, orden, estado) VALUES
+('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal2.png', '/PaginaWeb_BU/resource_productos.php', 2, 'activo'),
+('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal3.png', '/PaginaWeb_BU/resource_productos.php', 3, 'activo'),
+('banner', 'Novedad en Zapatillas', '¡Hasta 40% de descuento!', 'imagenes/home/banner2.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 4, 'activo'),
+('banner', 'No te pierda lo ultimo', '¡Hasta 20% de descuento!', 'imagenes/home/banner2.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 5, 'activo');
