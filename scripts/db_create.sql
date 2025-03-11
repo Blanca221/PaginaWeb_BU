@@ -213,14 +213,27 @@ INSERT INTO Producto_Imagenes (id_producto, url_imagen, es_principal, orden)
 SELECT 
     2, -- id_producto cambiado a 2
     'imagenes/productos/adidas/zapatillas/campus-grises/1.png', -- ruta actualizada para el nuevo producto
-    TRUE,
-    1
+    TRUE, -- es_principal cambiado a TRUE sino es false
+    1 --Este es el orden de la imagen
 WHERE EXISTS (
     SELECT 1 
     FROM Producto 
     WHERE id_producto = 2  -- también cambiado a 2
 );
 
+
+-- mejor explicado
+INSERT INTO Producto_Imagenes (id_producto, url_imagen, es_principal, orden)
+SELECT 
+    5, -- id_producto cambiado a 2
+    'imagenes/productos/adidas/zapatillas/campus-negras/2.png', -- ruta actualizada para el nuevo producto
+    FALSE, -- es_principal cambiado a TRUE sino es false
+    2 -- Este es el orden de la imagen
+WHERE EXISTS (
+    SELECT 1 
+    FROM Producto 
+    WHERE id_producto = 5  -- también cambiado a 2
+);
 -- 3.Verificar que se guardó
 SELECT url_imagen FROM Producto_Imagenes WHERE id_producto = 2;
 
