@@ -1,19 +1,15 @@
-<html lang="ca">
+<?php
+$pageTitle = 'Inicio - Tienda Deportiva';
 
-<head>
-    <title>Portada - TDIW</title>
-</head>
+// Iniciar el buffer de salida
+ob_start();
 
-<body>
+// Incluir el controlador de la portada
+require_once __DIR__ . '/controller/mostrar_portada.php';
 
-    <div class="container">
-        Este es nuestro pagina de inicio <br>
-    </div>
-    <!--1.Modifica el "resource_portada", agrega un link para ir al resource "resource_llistar_categories"-->
-    <a href="?action=llistar-categories">Ir a listar categorias</a>
-     <!--2.Mofifica el "resource_portada", agrega el mensaje con el id 1 de la tabla MENSAJES.-->
-    <?php require __DIR__ . '/controller/llistar_mensaje.php'; ?>
+// Obtener el contenido del buffer
+$content = ob_get_clean();
 
-</body>
-
-</html 
+// Incluir el layout principal
+require_once __DIR__ . '/views/layouts/main.php';
+?>
