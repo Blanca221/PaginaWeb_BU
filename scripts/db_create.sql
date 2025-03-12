@@ -253,11 +253,10 @@ CREATE TABLE Home_Content (
 );
 
 -- contenido del home
-INSERT INTO Home_Content (tipo, titulo, subtitulo, url_imagen, url_enlace, orden, estado) VALUES
-('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal1.png', '/PaginaWeb_BU/resource_productos.php', 1, 'activo');
 
 INSERT INTO Home_Content (tipo, titulo, subtitulo, url_imagen, url_enlace, orden, estado) VALUES
+('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal1.png', '/PaginaWeb_BU/resource_productos.php', 1, 'activo');
 ('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal2.png', '/PaginaWeb_BU/resource_productos.php', 2, 'activo'),
 ('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal3.png', '/PaginaWeb_BU/resource_productos.php', 3, 'activo'),
 ('banner', 'Novedad en Zapatillas', '¡Hasta 40% de descuento!', 'imagenes/home/banner2.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 4, 'activo'),
-('banner', 'No te pierda lo ultimo', '¡Hasta 20% de descuento!', 'imagenes/home/banner2.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 5, 'activo');
+('banner', 'No te pierda lo ultimo', '¡Hasta 20% de descuento!', 'imagenes/home/banner1.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 5, 'activo');
