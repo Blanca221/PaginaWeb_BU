@@ -12,7 +12,7 @@ switch ($action) {
         include __DIR__.'/resource_iniciar_sesion.php';
         break;
     //pagina de  registro
-    case 'pagina-registre':
+    case 'pagina-registro':
          include __DIR__.'/resource_registre.php';
          break;
     //pagina de producto

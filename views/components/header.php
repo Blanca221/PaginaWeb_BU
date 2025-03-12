@@ -17,6 +17,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Carrito</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-link nav-link dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <?php if(!isset($_SESSION['user_id'])): ?>
+                                        <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=pagina-registro">Registrarse</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=pagina-login">Iniciar Sesión</a></li>
+                                    <?php else: ?>
+                                        <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+                                        <li><a class="dropdown-item" href="#">Mis Pedidos</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=cerrar-sesion">Cerrar Sesión</a></li>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </nav>
