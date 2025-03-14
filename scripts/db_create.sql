@@ -260,3 +260,19 @@ INSERT INTO Home_Content (tipo, titulo, subtitulo, url_imagen, url_enlace, orden
 ('hero', 'Nueva Colección Deportiva', 'Descubre lo último en moda deportiva', 'imagenes/home/hero-principal3.png', '/PaginaWeb_BU/resource_productos.php', 3, 'activo'),
 ('banner', 'Novedad en Zapatillas', '¡Hasta 40% de descuento!', 'imagenes/home/banner2.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 4, 'activo'),
 ('banner', 'No te pierda lo ultimo', '¡Hasta 20% de descuento!', 'imagenes/home/banner1.png', '/PaginaWeb_BU/resource_productos.php?categoria=1', 5, 'activo');
+
+-- Inserts de productos
+INSERT INTO `producto` (`id_producto`, `nombre_producto`, `descripcion`, `precio`, `stock`, `id_categoria`, `color`, `talla`, `fecha`, `estado`, `id_marca`) VALUES
+(6, 'Adidas Campus Verdes', 'Zapatillas deportivas Adidas Campus en color verde, perfectas para un estilo casual y deportivo', 115.99, 50, 1, 'Verde', '43', '2025-03-12', 'activo', 2),
+(10, 'Nike Air Force', 'Zapatillas deportivas Nike Air Force en color blanco, perfectas para un estilo casual y deportivo', 75.99, 56, 1, 'Blancas', '46', '2025-03-12', 'activo', 1),
+(12, 'Nike Jordan Negras', 'Zapatillas deportivas Nike Jordan en color Negro, perfectas para un estilo casual y deportivo', 59.99, 50, 1, 'Negra', '40', '2025-03-14', 'activo', 1);
+
+-- Insert de Imagenes
+
+INSERT INTO `producto_imagenes` (`id_imagen`, `id_producto`, `url_imagen`, `es_principal`, `orden`, `fecha_creacion`) VALUES
+(15, 6, 'imagenes/productos/adidas/zapatillas/campus-verdes/1.png', 1, 1, '2025-03-12 15:14:45'),
+(16, 6, 'imagenes/productos/adidas/zapatillas/campus-verdes/2.png', 0, 2, '2025-03-12 15:16:28'),
+(17, 6, 'imagenes/productos/adidas/zapatillas/campus-verdes/3.png', 0, 3, '2025-03-12 15:19:26'),
+(18, 10, 'imagenes/productos/nike/zapatillas/jordan-blanca/1.png', 1, 1, '2025-03-12 15:48:31'),
+(19, 10, 'imagenes/productos/nike/zapatillas/jordan-blanca/2.png', 0, 2, '2025-03-12 15:49:23'),
+(20, 10, 'imagenes/productos/nike/zapatillas/jordan-blanca/3.png', 0, 3, '2025-03-12 15:49:37');
