@@ -86,4 +86,31 @@ function getProductById($conection, $id_producto) {
     }
 }
 
+/**
+ * Obtiene los productos destacados limitados a una cantidad específica
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param int $limit Número máximo de productos a retornar
+ * @return array Lista de productos destacados
+ */
+function getProductosDestacados($conection, $limit = 3) {
+    try {
+        $consulta = $conection->prepare("
+            SELECT p.*, pi.url_imagen, m.nombre_marca as marca
+            FROM producto p 
+            LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+            LEFT JOIN marca m ON p.id_marca = m.id_marca
+            WHERE pi.es_principal = TRUE OR pi.es_principal IS NULL
+            ORDER BY p.fecha_creacion DESC
+            LIMIT ?
+        ");
+        $consulta->bindParam(1, $limit, PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
 ?>
