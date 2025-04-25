@@ -115,7 +115,7 @@ function estaLogueado() {
 function cerrarSesion() {
     $_SESSION = array();
     session_destroy();
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 

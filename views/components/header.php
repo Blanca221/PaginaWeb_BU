@@ -1,47 +1,48 @@
-<header class="bg-white py-3 border-bottom">
+<header>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-3">
                 <a href="/PaginaWeb_BU/" class="text-decoration-none">
-                    <h1 class="h3 mb-0 text-dark fw-bold">SPORTS STORE</h1>
+                    <h1 class="h3 mb-0 fw-bold">SPORTS STORE</h1>
                 </a>
             </div>
             <div class="col-md-6">
                 <nav class="navbar navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/PaginaWeb_BU/resource_productos.php?categoria=hombre">HOMBRE</a>
+                                <a class="nav-link" href="/PaginaWeb_BU/index.php?action=categoria-hombre">HOMBRE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/PaginaWeb_BU/resource_productos.php?categoria=mujer">MUJER</a>
+                                <a class="nav-link" href="/PaginaWeb_BU/index.php?action=categoria-mujer">MUJER</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/PaginaWeb_BU/resource_productos.php?categoria=ninos">NIÑOS</a>
+                                <a class="nav-link" href="/PaginaWeb_BU/index.php?action=categoria-ninos">NIÑOS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/PaginaWeb_BU/resource_productos.php?categoria=ofertas">OFERTAS</a>
+                                <a class="nav-link" href="/PaginaWeb_BU/resource_productos.php?categoria=ofertas">OFERTAS</a>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div>
             <div class="col-md-3">
-                <div class="d-flex justify-content-end align-items-center">
-                    <form class="me-3" action="/PaginaWeb_BU/resource_productos.php" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Buscar productos..." name="buscar">
-                            <button class="btn btn-outline-dark" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                <div class="user-options">
+                    <form class="search-form" action="/PaginaWeb_BU/resource_productos.php" method="GET">
+                        <input type="text" class="search-input" placeholder="Buscar productos..." name="buscar">
+                        <button class="search-btn" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </form>
                     <div class="dropdown">
-                        <button class="btn btn-link text-dark me-3 p-0" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-link p-0" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <?php if(!isset($_SESSION['user_id'])): ?>
+                            <?php if(!isset($_SESSION['loggedin'])): ?>
                                 <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=pagina-registro">Registrarse</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=pagina-login">Iniciar Sesión</a></li>
@@ -53,10 +54,10 @@
                             <?php endif; ?>
                         </ul>
                     </div>
-                    <a href="#" class="text-dark position-relative">
+                    <a href="#" class="position-relative">
                         <i class="fas fa-shopping-cart"></i>
                         <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
                                 <?php echo count($_SESSION['cart']); ?>
                             </span>
                         <?php endif; ?>

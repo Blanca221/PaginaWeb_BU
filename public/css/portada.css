@@ -1,0 +1,286 @@
+/**
+ * ESTILOS PARA LA PÁGINA PRINCIPAL (PORTADA) - TEMA URBANO VIBRANTE
+ * INSPIRADO EN JD SPORTS Y FOOTLOCKER
+ */
+
+/* VARIABLES DE COLORES */
+:root {
+    --black: #000000; --yellow: #FFD100; --orange: #FF6B00;
+    --purple: #7928CA; --neon-green: #39FF14; --hot-pink: #FF1493;
+    --cyan: #00D4FF; --dark-gray: #111111; --light-gray: #F2F2F2;
+}
+
+/* ESTILOS GENERALES Y RESET */
+body {
+    overflow-x: hidden; padding: 0; margin: 0;
+    font-family: 'Montserrat', sans-serif; background-color: var(--black);
+}
+
+.container-fluid {
+    padding-left: 0 !important; padding-right: 0 !important;
+    margin-left: 0 !important; margin-right: 0 !important;
+    width: 100% !important; max-width: 100% !important;
+}
+
+/* SECCIÓN DE CATEGORÍAS */
+.categories-section {
+    padding: 0 !important; background-color: var(--black); width: 100%;
+}
+
+.categories-section .container-fluid {
+    padding: 0; max-width: 100%; width: 100%;
+}
+
+.categories-section .row {
+    display: flex; flex-wrap: nowrap; margin: 0 !important;
+    --bs-gutter-x: 0 !important; width: 100% !important;
+}
+
+.categories-section .col-md-4 {
+    flex: 1; width: 33.333%; padding: 0 !important; margin: 0 !important;
+}
+
+/* ESPACIADO GENERAL */
+section { margin-bottom: 0 !important; padding: 0 !important; }
+
+/* SECCIÓN HERO/CABECERA */
+.hero-section {
+    margin-bottom: 0 !important; margin-top: 0 !important;
+    padding-top: 0 !important; width: 100%;
+}
+
+.hero-slide {
+    position: relative; background-color: var(--black);
+    overflow: hidden; height: calc(100vh - 80px);
+}
+
+.hero-slide::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    z-index: 1;
+}
+
+/* ELEMENTOS DEL CARRUSEL */
+.carousel-inner { height: 100%; }
+.carousel-inner .carousel-item { height: 100%; }
+.carousel-inner img {
+    opacity: 0.85; object-fit: cover; width: 100%; height: 100%;
+}
+
+.carousel-caption {
+    bottom: 20%; left: 10%; right: auto; text-align: left;
+    max-width: 600px; z-index: 2;
+}
+
+/* TEXTO Y ELEMENTOS DEL HERO */
+.hero-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 3.5rem;
+    text-transform: uppercase; margin-bottom: 1rem;
+    letter-spacing: -1px; line-height: 1;
+}
+
+.hero-subtitle {
+    font-family: 'Montserrat', sans-serif; font-weight: 400;
+    font-size: 1.25rem; margin-bottom: 1.5rem;
+}
+
+.hero-btn {
+    background-color: var(--yellow); color: var(--black);
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    padding: 12px 30px; border-radius: 0; text-transform: uppercase;
+    transition: all 0.3s ease; border: none; letter-spacing: 1px;
+}
+
+.hero-btn:hover {
+    background-color: white; color: var(--black); transform: translateY(-3px);
+}
+
+/* INDICADORES DEL CARRUSEL */
+.carousel-indicators [data-bs-target] {
+    width: 12px; height: 12px; border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5); margin: 0 6px;
+}
+
+.carousel-indicators .active { background-color: var(--yellow); }
+
+/* ESTILOS PARA CATEGORÍAS DESTACADAS */
+.section-title-container { padding: 40px 0 20px; }
+
+.section-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    text-transform: uppercase; margin-bottom: 30px; text-align: center;
+    color: white; position: relative; letter-spacing: 2px; padding: 0 15px;
+}
+
+.section-title::after {
+    content: ''; position: absolute; bottom: -10px; left: 50%;
+    transform: translateX(-50%); width: 60px; height: 4px;
+    background-color: var(--yellow);
+}
+
+/* TARJETAS DE CATEGORÍA */
+.category-card {
+    position: relative; height: 100vh; border-radius: 0; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; margin-bottom: 0 !important;
+}
+
+.category-card:hover {
+    transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); z-index: 1;
+}
+
+.category-card img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+}
+
+.category-card:hover img { transform: scale(1.05); }
+
+/* COLORES Y GRADIENTES PARA CATEGORÍAS */
+.category-hombre .overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(255, 209, 0, 0.9)) !important; /* Amarillo brillante */
+}
+
+.category-mujer .overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(255, 20, 147, 0.9)) !important; /* Rosa fuerte */
+}
+
+.category-ninos .overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5), rgba(57, 255, 20, 0.85)) !important; /* Verde neón */
+}
+
+/* TEXTOS DE CATEGORÍA */
+.category-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px;
+}
+
+.category-subtitle {
+    font-family: 'Montserrat', sans-serif; font-weight: 400;
+    font-size: 1.2rem; margin-bottom: 1.5rem;
+}
+
+/* BOTONES DE CATEGORÍA */
+.category-btn {
+    background-color: white !important; color: var(--black) !important;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    text-transform: uppercase; padding: 12px 30px; border-radius: 0;
+    letter-spacing: 1px; transition: all 0.3s ease;
+}
+
+.category-hombre .category-btn:hover,
+.category-mujer .category-btn:hover,
+.category-ninos .category-btn:hover {
+    background-color: white !important; color: var(--black) !important;
+}
+
+/* SECCIÓN DE PRODUCTOS DESTACADOS */
+.featured-products {
+    padding: 0 !important; background-color: var(--black); width: 100%;
+}
+
+.featured-products .section-title {
+    color: white; padding-top: 40px;
+}
+
+.featured-products .container-fluid {
+    padding: 0; max-width: 100%; width: 100%;
+}
+
+.featured-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px; padding: 0 15px;
+}
+
+.featured-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 2rem;
+    text-transform: uppercase; margin-bottom: 0; color: white; letter-spacing: 1px;
+}
+
+.view-all {
+    font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem;
+    text-transform: uppercase; color: var(--yellow); letter-spacing: 1px;
+    transition: color 0.2s ease;
+}
+
+.view-all:hover { color: var(--hot-pink); }
+
+/* TARJETAS DE PRODUCTOS */
+.product-card {
+    position: relative; height: 100%; background-color: white; border-radius: 0;
+    overflow: hidden; transition: all 0.3s ease; display: flex;
+    flex-direction: column; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0 !important;
+}
+
+.product-card:hover {
+    transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); z-index: 1;
+}
+
+.product-img-container {
+    position: relative; height: 220px; overflow: hidden; background-color: #f8f8f8;
+}
+
+.product-img {
+    width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img { transform: scale(1.05); }
+
+/* INFORMACIÓN DEL PRODUCTO */
+.product-info {
+    padding: 15px; flex-grow: 1; display: flex;
+    flex-direction: column; justify-content: space-between;
+}
+
+.product-title {
+    font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1rem;
+    margin-bottom: 8px; color: var(--dark-gray); height: 40px; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+
+.product-brand {
+    font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.9rem;
+    color: #777; margin-bottom: 15px;
+}
+
+.product-price {
+    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.2rem;
+    color: var(--dark-gray); margin: 0;
+}
+
+/* ETIQUETAS DE PRODUCTOS */
+.badge {
+    position: absolute; top: 15px; right: 15px; z-index: 2;
+    background-color: var(--hot-pink); color: white;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px;
+    text-transform: uppercase; border-radius: 0;
+}
+
+/* RESETEO DE MÁRGENES Y PADDING */
+.row {
+    margin: 0 !important; --bs-gutter-x: 0 !important; width: 100% !important;
+}
+
+.row > * { padding: 0 !important; }
+
+.col-md-4, .col-lg-3, .col-md-4, .col-sm-6 { padding: 0 !important; }
+
+/* ESTILOS RESPONSIVOS */
+@media (max-width: 991px) {
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1rem; }
+    .category-card { height: 100vh; }
+    .category-title { font-size: 2rem; }
+    .product-img-container { height: 200px; }
+}
+
+@media (max-width: 767px) {
+    .carousel-caption { bottom: 10%; left: 5%; }
+    .hero-title { font-size: 2rem; }
+    .hero-btn { padding: 10px 20px; }
+    .categories-section .section-title-container,
+    .featured-products .section-title { padding-top: 30px; }
+    .category-card { height: 100vh; }
+    .featured-title { font-size: 1.5rem; }
+} 

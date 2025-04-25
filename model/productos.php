@@ -69,7 +69,7 @@ function getProductById($conection, $id_producto) {
         // Si el producto existe, obtener sus imágenes
         if ($producto) {
             $consulta_imagenes = $conection->prepare("
-                SELECT url_imagen, es_principal
+                SELECT CONCAT('/PaginaWeb_BU/public/', url_imagen) as url_imagen, es_principal
                 FROM producto_imagenes
                 WHERE id_producto = ?
                 ORDER BY es_principal DESC, orden ASC
@@ -102,6 +102,37 @@ function getProductosDestacados($conection, $limit = 3) {
             LEFT JOIN marca m ON p.id_marca = m.id_marca
             WHERE pi.es_principal = TRUE OR pi.es_principal IS NULL
             ORDER BY p.fecha_creacion DESC
+            LIMIT ?
+        ");
+        $consulta->bindParam(1, $limit, PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
+/**
+ * Obtiene productos aleatorios para mostrar en la portada
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param int $limit Número máximo de productos a retornar
+ * @return array Lista de productos aleatorios
+ */
+function getProductosAleatorios($conection, $limit = 4) {
+    try {
+        $consulta = $conection->prepare("
+            SELECT p.id_producto, 
+                   p.nombre_producto as nombre, 
+                   p.precio, 
+                   m.nombre_marca as marca, 
+                   CONCAT('/PaginaWeb_BU/public/', pi.url_imagen) as url_imagen
+            FROM producto p 
+            LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+            LEFT JOIN marca m ON p.id_marca = m.id_marca
+            WHERE pi.es_principal = TRUE 
+            ORDER BY RAND()
             LIMIT ?
         ");
         $consulta->bindParam(1, $limit, PDO::PARAM_INT);
