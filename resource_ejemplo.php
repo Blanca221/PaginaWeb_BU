@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ejemplo AJAX</title>
 </head>
 <body>
-    <button id="boton">Click me</button>
+    <!-- EJEMPLO DE LLAMADA AJAX A UN ENDPOINT DE LA API -->
+    <button id="boton">Cargar productos</button>
     <div id="result"></div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        let saludo = $("#boton");
-        // Realiza una petición GET a la URL especificada con AJAX
-        saludo.click(function() {
+        // IMPLEMENTACIÓN DE LLAMADA AJAX
+        document.getElementById("boton").addEventListener("click", function() {
             $.ajax({
                 url: "?action=llistar-productes",
-                type: "GET",//esta haciendo una petición al servidor a esa url
-                success: function(response) {//si se hace correctamente
-                    $("#result").html(response); //el div imprimira el resultado
+                type: "GET",
+                success: function(response) {
+                    document.getElementById("result").innerHTML = response;
                 },
-                error: function(error) {//sino mostrara un herror
-                    console.log(error);
+                error: function(error) {
+                    console.error("Error en la petición:", error);
                 }
             });
         });

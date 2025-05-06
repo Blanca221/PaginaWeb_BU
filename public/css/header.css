@@ -1,0 +1,117 @@
+/**
+ * ESTILOS PARA EL HEADER - INSPIRADO EN JD SPORTS Y FOOTLOCKER
+ */
+
+/* VARIABLES DE COLORES */
+:root {
+    --black: #000000; --yellow: #FFD100; --orange: #FF6B00;
+    --purple: #7928CA; --neon-green: #39FF14; --hot-pink: #FF1493;
+    --cyan: #00D4FF; --dark-gray: #111111; --light-gray: #F2F2F2;
+}
+
+/* ESTILOS GENERALES DEL HEADER */
+header {
+    background-color: var(--black) !important; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-bottom: none !important; padding: 0 !important;
+    position: relative; z-index: 1000;
+}
+
+header .container { max-width: 1400px; padding: 15px 20px; }
+
+/* ESTILO DEL LOGO */
+header h1 {
+    color: white !important; font-family: 'Montserrat', sans-serif;
+    font-weight: 900 !important; letter-spacing: -1px;
+    text-shadow: 2px 2px 0 var(--yellow); margin: 0;
+    transition: transform 0.3s ease;
+}
+header h1:hover { transform: scale(1.05); }
+
+/* ESTILOS DE NAVEGACIÓN */
+header .navbar { padding: 0; }
+header .nav-item { margin: 0 5px; position: relative; }
+header .nav-link {
+    color: white !important; font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: 0.9rem; text-transform: uppercase;
+    letter-spacing: 1px; padding: 10px 15px !important;
+    transition: all 0.3s ease; position: relative;
+}
+header .nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 50%;
+    width: 0; height: 3px; background-color: var(--yellow);
+    transition: all 0.3s ease; transform: translateX(-50%);
+}
+header .nav-link:hover { color: var(--yellow) !important; }
+header .nav-link:hover::after { width: 70%; }
+
+/* MENU HAMBURGUESA */
+header .navbar-toggler { border: none; color: white; padding: 5px; }
+header .navbar-toggler:focus { box-shadow: none; }
+header .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ICONOS DE USUARIO, BÚSQUEDA Y CARRITO */
+header .user-options { display: flex; align-items: center; gap: 20px; }
+header .user-options a { color: white !important; font-size: 1.2rem; transition: all 0.3s ease; }
+header .user-options a:hover { color: var(--yellow) !important; transform: translateY(-2px); }
+
+/* MENÚ DESPLEGABLE DE USUARIO */
+header .dropdown-menu {
+    background-color: white; border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: none;
+    padding: 8px 0; margin-top: 10px;
+}
+header .dropdown-item {
+    color: var(--black) !important; font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem; padding: 8px 20px;
+    transition: background-color 0.2s ease;
+}
+header .dropdown-item:hover { background-color: #f5f5f5; color: var(--black) !important; }
+header .dropdown-divider { margin: 4px 0; border-color: #eee; }
+header .dropdown-menu a, header .dropdown-menu button,
+header .dropdown-menu span, header .dropdown-menu p { color: var(--black) !important; }
+
+/* BADGE DEL CARRITO */
+header .badge {
+    background-color: var(--hot-pink) !important; color: white;
+    border: 2px solid var(--black); font-weight: 700;
+}
+
+/* BARRA DE BÚSQUEDA */
+header .search-form { position: relative; }
+header .search-input {
+    border-radius: 20px; border: none; padding: 8px 35px 8px 15px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+    width: 100%; background-color: #333; color: white;
+    transition: all 0.3s ease;
+}
+header .search-input:focus {
+    background-color: #444; box-shadow: 0 0 0 2px var(--yellow);
+    outline: none;
+}
+header .search-input::placeholder { color: #999; }
+header .search-btn {
+    position: absolute; right: 10px; top: 50%;
+    transform: translateY(-50%); background: none; border: none;
+    color: #999; font-size: 0.9rem; cursor: pointer;
+}
+
+/* ESTILOS RESPONSIVE */
+@media (max-width: 991px) {
+    header .container { padding: 10px 15px; }
+    header .nav-item { margin: 5px 0; }
+    header .nav-link { padding: 8px 5px !important; }
+    header .nav-link::after { display: none; }
+    header .navbar-collapse {
+        background-color: var(--dark-gray);
+        margin: 10px -15px -10px; padding: 10px;
+    }
+    header .user-options { margin-top: 15px; justify-content: center; }
+}
+
+@media (max-width: 576px) {
+    header h1 { font-size: 1.5rem !important; }
+    header .user-options { gap: 15px; }
+    header .user-options a { font-size: 1rem; }
+} 

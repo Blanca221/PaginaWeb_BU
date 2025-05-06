@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* ESTILOS GENERALES */
 body {
     min-height: 100vh;
     display: flex;
@@ -9,7 +9,7 @@ main {
     flex: 1;
 }
 
-/* Estilos para las tarjetas de productos */
+/* TARJETAS DE PRODUCTOS */
 .producto-card {
     transition: transform 0.2s;
 }
@@ -24,18 +24,19 @@ main {
     width: 100%;
 }
 
-/* Estilos para badges y precios */
+/* BADGES Y ETIQUETAS DE PRECIO */
 .badge {
     font-size: 0.9rem;
 }
 
-/* Estilos para botones */
+/* ESTILOS DE BOTONES */
 .btn-primary {
     text-transform: uppercase;
     font-size: 0.9rem;
     font-weight: 500;
 }
-/* Estilos del Hero Carousel */
+
+/* CARRUSEL PRINCIPAL */
 .hero-slide {
     position: relative;
 }
@@ -48,7 +49,7 @@ main {
     margin: 0 auto;
 }
 
-/* Estilos para los banners */
+/* SECCIÓN DE BANNERS */
 .banner-card {
     height: 300px;
 }
@@ -73,7 +74,7 @@ main {
     );
 }
 
-/* Responsive */
+/* ADAPTACIÓN RESPONSIVA */
 @media (max-width: 768px) {
     .hero-slide {
         height: 400px;

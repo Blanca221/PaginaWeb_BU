@@ -8,7 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
+    <link href="/PaginaWeb_BU/public/css/header.css" rel="stylesheet">
+    <link href="/PaginaWeb_BU/public/css/portada.css" rel="stylesheet">
     <link href="/PaginaWeb_BU/public/css/styles.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -17,7 +21,7 @@
     <?php include __DIR__ . '/../components/header.php'; ?>
 
     <!-- Main Content -->
-    <main class="container py-4">
+    <main class="container-fluid px-0">
         <!-- Contenido de la página -->
         <?php echo $content ?? ''; ?>
     </main>

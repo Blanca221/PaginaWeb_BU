@@ -1,4 +1,6 @@
 <?php
+// RECURSO PARA DETALLE DE PRODUCTO - PATRÓN MVC
+
 // Definir el título de la página
 $pageTitle = 'Detalle del Producto';
 

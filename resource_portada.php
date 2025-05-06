@@ -1,4 +1,6 @@
 <?php
+// RECURSO PRINCIPAL - PÁGINA DE INICIO DE LA TIENDA
+
 $pageTitle = 'Inicio - Tienda Deportiva';
 
 // Iniciar el buffer de salida

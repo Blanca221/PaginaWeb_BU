@@ -1,25 +1,27 @@
-/* public/css/forms.css */
+/* ESTILOS PARA FORMULARIOS */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
 }
 
+/* CONTENEDOR PRINCIPAL */
 .container {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 50px auto 0;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
 }
 
+/* ENCABEZADOS */
 h2 {
     color: #333;
     text-align: center;
     margin-bottom: 25px;
 }
 
+/* ETIQUETAS DE FORMULARIO */
 label {
     display: block;
     margin-bottom: 5px;
@@ -27,6 +29,7 @@ label {
     font-weight: bold;
 }
 
+/* CAMPOS DE ENTRADA DE TEXTO */
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -37,6 +40,7 @@ input[type="password"] {
     box-sizing: border-box;
 }
 
+/* ESTADOS DE FOCO */
 input[type="text"]:focus,
 input[type="password"]:focus {
     border-color: #4CAF50;
@@ -44,6 +48,7 @@ input[type="password"]:focus {
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
 }
 
+/* BOTONES */
 button,
 input[type="submit"] {
     background-color: #4CAF50;
@@ -61,6 +66,7 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
+/* MENSAJES DE ESTADO */
 .error {
     color: #dc3545;
     font-size: 0.9em;
@@ -73,10 +79,12 @@ input[type="submit"]:hover {
     margin-top: 5px;
 }
 
+/* UTILIDADES */
 .hidden {
     display: none;
 }
 
+/* CONTENEDOR DE PREGUNTAS */
 #pregunta-text {
     background-color: #f8f9fa;
     padding: 10px;
@@ -85,7 +93,7 @@ input[type="submit"]:hover {
     color: #495057;
 }
 
-/* Estilos responsivos */
+/* ADAPTACIÓN RESPONSIVA */
 @media (max-width: 600px) {
     .container {
         margin: 20px;

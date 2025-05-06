@@ -16,7 +16,7 @@
                         <div class="carousel-inner">
                             <?php foreach ($producto['imagenes'] as $index => $imagen): ?>
                                 <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                                    <img src="/PaginaWeb_BU/public/<?php echo htmlspecialchars($imagen['url_imagen']); ?>" 
+                                    <img src="<?php echo htmlspecialchars($imagen['url_imagen']); ?>" 
                                          class="d-block w-100 rounded" 
                                          alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
                                 </div>

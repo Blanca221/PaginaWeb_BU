@@ -1,21 +1,18 @@
-<html lang="ca">
+<?php
+// RECURSO PARA LISTAR CATEGORÍAS
 
-<head>
-    <title>Llistat de categories - TDIW</title>
-</head>
+// Definir el título de la página
+$pageTitle = 'Categorías - Tienda Deportiva';
 
-<body>
-    <!-- /**
-        * Página de listado de categorías
-        * 
-        * Esta página muestra un listado de todas las categorías disponibles en la base de datos.
-        * 
-        * @requires controller/llistar_categories.php
-        */-->
-    <div class="container">
-        <?php require __DIR__ . '/controller/llistar_categories.php'; ?>
-    </div>
+// Iniciar el buffer de salida
+ob_start();
 
-</body>
+// Incluir el controlador
+require_once __DIR__ . '/controller/llistar_categories.php';
 
-</html>
+// Obtener el contenido del buffer
+$content = ob_get_clean();
+
+// Incluir el layout principal
+require_once __DIR__ . '/views/layouts/main.php';
+?>

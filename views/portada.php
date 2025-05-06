@@ -1,7 +1,6 @@
-<!-- Hero Carousel - Full Width -->
-<div class="hero-fullwidth">
+<!-- Hero Section con Carrusel -->
+<section class="hero-section position-relative">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Indicadores -->
         <div class="carousel-indicators">
             <?php foreach ($heroes as $index => $hero): ?>
                 <button type="button" 
@@ -13,28 +12,23 @@
                 </button>
             <?php endforeach; ?>
         </div>
-
-        <!-- Slides -->
         <div class="carousel-inner">
             <?php foreach ($heroes as $index => $hero): ?>
                 <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
                     <div class="hero-slide">
                         <img src="<?php echo htmlspecialchars($hero['url_imagen_completa']); ?>" 
                              alt="<?php echo htmlspecialchars($hero['titulo']); ?>">
-                        <div class="hero-content">
-                            <h1><?php echo htmlspecialchars($hero['titulo']); ?></h1>
-                            <p><?php echo htmlspecialchars($hero['subtitulo']); ?></p>
-                            <a href="<?php echo htmlspecialchars($hero['url_enlace']); ?>" 
-                               class="btn btn-light btn-lg">
-                                Descubrir más
+                        <div class="carousel-caption">
+                            <h1 class="hero-title"><?php echo htmlspecialchars($hero['titulo']); ?></h1>
+                            <p class="hero-subtitle"><?php echo htmlspecialchars($hero['subtitulo']); ?></p>
+                            <a href="<?php echo htmlspecialchars($hero['url_enlace']); ?>" class="btn hero-btn">
+                                COMPRAR AHORA
                             </a>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-
-        <!-- Controles -->
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
@@ -42,141 +36,99 @@
             <span class="carousel-control-next-icon"></span>
         </button>
     </div>
-</div>
+</section>
 
-<!-- Banners Section -->
-<div class="container mt-5">
-    <div class="row g-4">
-        <?php foreach ($banners as $banner): ?>
-            <div class="col-md-6">
-                <div class="banner-card position-relative overflow-hidden rounded shadow">
-                    <img src="/PaginaWeb_BU/public/<?php echo htmlspecialchars($banner['url_imagen']); ?>" 
-                         class="w-100 h-100 object-fit-cover" 
-                         alt="<?php echo htmlspecialchars($banner['titulo']); ?>">
-                    
-                    <!-- Contenido del banner -->
-                    <div class="banner-content position-absolute bottom-0 start-0 w-100 text-white p-4">
-                        <h3 class="mb-2"><?php echo htmlspecialchars($banner['titulo']); ?></h3>
-                        <p class="mb-3"><?php echo htmlspecialchars($banner['subtitulo']); ?></p>
-                        <?php if ($banner['url_enlace']): ?>
-                            <a href="<?php echo htmlspecialchars($banner['url_enlace']); ?>" 
-                               class="btn btn-light">
-                                Ver más
+<!-- Categorías Destacadas -->
+<section id="categorias" class="categories-section">
+    <div class="container-fluid">
+        <div class="section-title-container">
+            <h2 class="section-title">CATEGORÍAS DESTACADAS</h2>
+        </div>
+        <div class="row">
+            <!-- Hombre -->
+            <div class="col-md-4">
+                <div class="category-card category-hombre">
+                    <img src="/PaginaWeb_BU/public/imagenes/home/cat hombre.webp" 
+                         alt="Categoría Hombre">
+                    <div class="overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center">
+                        <div class="text-center text-white">
+                            <h3 class="category-title">HOMBRE</h3>
+                            <p class="category-subtitle">Encuentra tu estilo deportivo</p>
+                            <a href="/PaginaWeb_BU/index.php?action=categoria-hombre" class="btn category-btn">
+                                Ver colección
                             </a>
-                        <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
+
+            <!-- Mujer -->
+            <div class="col-md-4">
+                <div class="category-card category-mujer">
+                    <img src="/PaginaWeb_BU/public/imagenes/home/cat mujer.webp" 
+                         alt="Categoría Mujer">
+                    <div class="overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center">
+                        <div class="text-center text-white">
+                            <h3 class="category-title">MUJER</h3>
+                            <p class="category-subtitle">Diseño y rendimiento</p>
+                            <a href="/PaginaWeb_BU/index.php?action=categoria-mujer" class="btn category-btn">
+                                Ver colección
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Niños -->
+            <div class="col-md-4">
+                <div class="category-card category-ninos">
+                    <img src="/PaginaWeb_BU/public/imagenes/home/cat niños.webp" 
+                         alt="Categoría Niños">
+                    <div class="overlay position-absolute w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center">
+                        <div class="text-center text-white">
+                            <h3 class="category-title">NIÑOS</h3>
+                            <p class="category-subtitle">Deporte y diversión</p>
+                            <a href="/PaginaWeb_BU/index.php?action=categoria-ninos" class="btn category-btn">
+                                Ver colección
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
-<style>
-/* Solo estilos del Hero */
-.hero-fullwidth {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    margin-top: -56px; /* Ajustado para compensar la altura del header */
-    margin-bottom: 0;
-}
-
-.hero-slide {
-    height: 100vh;
-    position: relative;
-    top: 0; /* Asegura que empiece desde arriba */
-}
-
-/* Ajuste para el contenedor del carousel */
-#heroCarousel {
-    margin: 0;
-    padding: 0;
-}
-
-.carousel-inner {
-    margin: 0;
-    padding: 0;
-}
-
-.hero-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    width: 80%;
-    max-width: 800px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 2rem;
-    border-radius: 10px;
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-.carousel-indicators button {
-    width: 30px;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    margin: 0 5px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-slide {
-        height: 70vh;
-    }
-
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1.2rem;
-    }
-}
-
-.banner-card {
-    height: 300px;
-    transition: transform 0.3s ease;
-}
-
-.banner-card:hover {
-    transform: scale(1.02);
-}
-
-.banner-content {
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.8) 0%,
-        rgba(0,0,0,0.4) 60%,
-        rgba(0,0,0,0) 100%
-    );
-}
-
-.banner-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-</style>
+<!-- Productos Destacados -->
+<section class="featured-products">
+    <div class="container-fluid">
+        <div class="section-title-container">
+            <h2 class="section-title">PRODUCTOS DESTACADOS</h2>
+        </div>
+        <div class="row">
+            <?php foreach ($productos_destacados as $producto): ?>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="/PaginaWeb_BU/index.php?action=detalle-producto&id=<?php echo $producto['id_producto']; ?>" class="text-decoration-none">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <?php if(isset($producto['es_nuevo']) && $producto['es_nuevo']): ?>
+                                <span class="badge">NUEVO</span>
+                            <?php endif; ?>
+                            <img src="<?php echo htmlspecialchars($producto['url_imagen'] ?? ''); ?>" 
+                                alt="<?php echo htmlspecialchars($producto['nombre'] ?? 'Producto'); ?>" 
+                                class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <div>
+                                <h5 class="product-title"><?php echo htmlspecialchars($producto['nombre'] ?? 'Producto sin nombre'); ?></h5>
+                                <p class="product-brand"><?php echo htmlspecialchars($producto['marca'] ?? ''); ?></p>
+                            </div>
+                            <p class="product-price">€<?php echo number_format($producto['precio'] ?? 0, 2); ?></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

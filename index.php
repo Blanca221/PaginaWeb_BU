@@ -2,36 +2,20 @@
 // index.php
 session_start();
 
+// CONTROLADOR PRINCIPAL - ROUTER DE LA APLICACIÓN
 $action = $_GET['action'] ?? null;
 
 switch ($action) {
-    
-    // Resources
-    //pagina de login
+    // MÓDULO DE AUTENTICACIÓN
     case 'pagina-login':
         include __DIR__.'/resource_iniciar_sesion.php';
         break;
-    //pagina de  registro
     case 'pagina-registro':
-         include __DIR__.'/resource_registre.php';
-         break;
-    //pagina de producto
-   
-    case 'pagina-productos':
-        include __DIR__.'/resource_productos.php';
+        include __DIR__.'/resource_registre.php';
         break;
-    // Resources
-     case 'llistar-categories':
-        include __DIR__.'/resource_llistar_categories.php';
-        break;
-
-    //NO lo e hecho aun
-    case 'Pagina-administracion':
-        include __DIR__.'/resource_administracion.php';
-            break;
-    //resource para restablecer la contraseña y los controladores
-    case 'Pagina-restablecerPassword':
-        include __DIR__.'/resource_restablecer_password.php';
+    case 'cerrar-sesion':
+        require_once __DIR__ . '/model/usuarios.php';
+        cerrarSesion();
         break;
     case 'obtener-pregunta':
         include __DIR__.'/controller/obtener_pregunta.php';
@@ -42,38 +26,47 @@ switch ($action) {
     case 'cambiar-password':
         include __DIR__.'/controller/cambiar_password.php';
         break;
-    
-    //Esta relacionada con la ruta registre
     case 'registre-session':
         include __DIR__.'/controller/almacenar_registro.php';
         break;
-    //Esta ruta al controlador revisa el mail que no este en uso
     case 'check-email':
         include __DIR__.'/controller/check_email.php';
-         break;
-    //Este relacionada con la ruta inicio-sesion
+        break;
     case 'inicio-session':
         include __DIR__.'/controller/iniciar_sesion.php';
         break;
-    /*
-     
-    //pagina de registro
-        //ESTAS DOS NO NECESITAN VIEW PORQUE NO SON PAGINAS SINO ACCIONES -> SON LOS CONTROLADORES 
-
-    //Esta relacionada con la ruta registre
-    case 'registre-session':
-        include __DIR__.'/controller/almacenar_registro.php';
+    case 'Pagina-restablecerPassword':
+        include __DIR__.'/resource_restablecer_password.php';
         break;
-    //Este relacionada con la ruta inicio-sesion
-    case 'inicio-session':
-        include __DIR__.'/controller/iniciar_sesion.php';
+    
+    // MÓDULO DE PRODUCTOS Y CATEGORÍAS
+    case 'pagina-productos':
+        include __DIR__.'/resource_productos.php';
         break;
-    */
+    case 'llistar-categories':
+        include __DIR__.'/resource_llistar_categories.php';
+        break;
+    case 'categoria-hombre':
+        include __DIR__.'/resource_categoria_hombre.php';
+        break;
+    case 'categoria-mujer':
+        include __DIR__.'/resource_categoria_mujer.php';
+        break;
+    case 'categoria-ninos':
+        include __DIR__.'/resource_categoria_ninos.php';
+        break;
+    case 'detalle-producto':
+        include __DIR__.'/resource_detalle_producto.php';
+        break;
 
-    // Default
+    // MÓDULO DE ADMINISTRACIÓN
+    case 'Pagina-administracion':
+        include __DIR__.'/resource_administracion.php';
+        break;
+
+    // PORTADA (DEFAULT)
     default:
         include __DIR__.'/resource_portada.php';
         break;
 }
-
 ?>

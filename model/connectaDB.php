@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase para gestionar la conexión a la base de datos mediante el patrón Singleton
+ * CLASE PARA LA CONEXIÓN A LA BASE DE DATOS (PATRÓN SINGLETON)
  * 
  * Esta clase proporciona una única instancia de conexión a la base de datos
  * utilizando PDO para MySQL.
@@ -17,15 +17,13 @@ class DB {
 	protected function __construct() {}
 
 	/**
-	 * Obtiene la instancia única de la conexión a la base de datos
+	 * MÉTODO PRINCIPAL PARA OBTENER CONEXIÓN A LA BASE DE DATOS
 	 * 
-	 * @return PDO Instancia de la conexión a la base de datos
-	 * @throws PDOException Si hay un error en la conexión
+	 * @return PDO Instancia de la conexión
 	 */
 	public static function getInstance() {
-
 		if(empty(self::$instance)) {
-
+			// CONFIGURACIÓN DE LA BASE DE DATOS
 			$db_info = array(
 				"db_host" => "localhost",
 				"db_port" => "3306",
@@ -35,20 +33,25 @@ class DB {
             );
 
 			try {
-				self::$instance = new PDO("mysql:host=".$db_info['db_host'].';port='.$db_info['db_port'].';dbname='.$db_info['db_name'], $db_info['db_user'], $db_info['db_pass']);
+				// CREAR CONEXIÓN PDO
+				self::$instance = new PDO(
+					"mysql:host=".$db_info['db_host'].
+					';port='.$db_info['db_port'].
+					';dbname='.$db_info['db_name'], 
+					$db_info['db_user'], 
+					$db_info['db_pass']
+				);
+				
+				// CONFIGURAR CONEXIÓN
 				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);  
 				self::$instance->query('SET NAMES utf8');
 				self::$instance->query('SET CHARACTER SET utf8');
-
 			} catch(PDOException $error) {
 				echo $error->getMessage();
 			}
-
 		}
-
 		return self::$instance;
 	}
-
 }
 
 ?>
