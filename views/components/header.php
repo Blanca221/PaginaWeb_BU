@@ -62,6 +62,13 @@
                             </span>
                         <?php endif; ?>
                     </a>
+                    <?php
+                    require_once __DIR__ . '/../../model/usuarios.php';
+                    if (esAdmin()): ?>
+                        <a href="/PaginaWeb_BU/index.php?action=Pagina-administracion" class="ms-3" title="Panel de administración">
+                            <i class="fas fa-cogs"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
