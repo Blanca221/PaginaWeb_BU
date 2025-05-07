@@ -144,4 +144,152 @@ function getProductosAleatorios($conection, $limit = 4) {
     }
 }
 
+/**
+ * Lista todos los productos con información adicional para el panel de administración
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @return array Lista de productos con información completa
+ */
+function listarProductos($conection) {
+    try {
+        $consulta = $conection->prepare("
+            SELECT p.*, c.nombre_cat, m.nombre_marca
+            FROM producto p
+            LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
+            LEFT JOIN marca m ON p.id_marca = m.id_marca
+            ORDER BY p.id_producto DESC
+        ");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
+/**
+ * Crea un nuevo producto en la base de datos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param array $datos Datos del producto
+ * @return bool True si se creó correctamente, False en caso contrario
+ */
+function crearProducto($conection, $datos) {
+    try {
+        $consulta = $conection->prepare("
+            INSERT INTO producto (
+                nombre_producto, descripcion, precio, stock, 
+                id_categoria, id_marca, color, talla, estado
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'activo')
+        ");
+        
+        $consulta->bindParam(1, $datos['nombre_producto'], PDO::PARAM_STR);
+        $consulta->bindParam(2, $datos['descripcion'], PDO::PARAM_STR);
+        $consulta->bindParam(3, $datos['precio'], PDO::PARAM_STR);
+        $consulta->bindParam(4, $datos['stock'], PDO::PARAM_INT);
+        $consulta->bindParam(5, $datos['id_categoria'], PDO::PARAM_INT);
+        $consulta->bindParam(6, $datos['id_marca'], PDO::PARAM_INT);
+        $consulta->bindParam(7, $datos['color'], PDO::PARAM_STR);
+        $consulta->bindParam(8, $datos['talla'], PDO::PARAM_STR);
+        
+        return $consulta->execute();
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+/**
+ * Actualiza un producto existente
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param array $datos Datos del producto
+ * @return bool True si se actualizó correctamente, False en caso contrario
+ */
+function actualizarProducto($conection, $datos) {
+    try {
+        $consulta = $conection->prepare("
+            UPDATE producto SET 
+                nombre_producto = ?,
+                descripcion = ?,
+                precio = ?,
+                stock = ?,
+                id_categoria = ?,
+                id_marca = ?,
+                color = ?,
+                talla = ?,
+                estado = ?
+            WHERE id_producto = ?
+        ");
+        
+        $consulta->bindParam(1, $datos['nombre_producto'], PDO::PARAM_STR);
+        $consulta->bindParam(2, $datos['descripcion'], PDO::PARAM_STR);
+        $consulta->bindParam(3, $datos['precio'], PDO::PARAM_STR);
+        $consulta->bindParam(4, $datos['stock'], PDO::PARAM_INT);
+        $consulta->bindParam(5, $datos['id_categoria'], PDO::PARAM_INT);
+        $consulta->bindParam(6, $datos['id_marca'], PDO::PARAM_INT);
+        $consulta->bindParam(7, $datos['color'], PDO::PARAM_STR);
+        $consulta->bindParam(8, $datos['talla'], PDO::PARAM_STR);
+        $consulta->bindParam(9, $datos['estado'], PDO::PARAM_STR);
+        $consulta->bindParam(10, $datos['id_producto'], PDO::PARAM_INT);
+        
+        return $consulta->execute();
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+/**
+ * Elimina un producto de la base de datos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param int $id_producto ID del producto a eliminar
+ * @return bool True si se eliminó correctamente, False en caso contrario
+ */
+function eliminarProducto($conection, $id_producto) {
+    try {
+        $consulta = $conection->prepare("DELETE FROM producto WHERE id_producto = ?");
+        $consulta->bindParam(1, $id_producto, PDO::PARAM_INT);
+        return $consulta->execute();
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+/**
+ * Obtiene todas las categorías para el formulario de productos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @return array Lista de categorías
+ */
+function obtenerCategorias($conection) {
+    try {
+        $consulta = $conection->prepare("SELECT id_categoria, nombre_cat FROM categoria ORDER BY nombre_cat");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
+/**
+ * Obtiene todas las marcas para el formulario de productos
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @return array Lista de marcas
+ */
+function obtenerMarcas($conection) {
+    try {
+        $consulta = $conection->prepare("SELECT id_marca, nombre_marca FROM marca WHERE estado = 'activo' ORDER BY nombre_marca");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
 ?>

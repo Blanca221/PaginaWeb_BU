@@ -61,6 +61,12 @@ switch ($action) {
 
     // MÓDULO DE ADMINISTRACIÓN
     case 'Pagina-administracion':
+        // Verificar si el usuario es administrador
+        require_once __DIR__ . '/model/usuarios.php';
+        if (!estaLogueado() || !esAdmin()) {
+            header("Location: index.php?action=pagina-login");
+            exit();
+        }
         include __DIR__.'/resource_administracion.php';
         break;
 

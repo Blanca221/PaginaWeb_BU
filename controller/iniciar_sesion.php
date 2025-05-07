@@ -16,16 +16,24 @@
 require_once __DIR__ . '/../model/connectaDb.php';
 require_once __DIR__ . '/../model/usuarios.php';
 
+session_start();
+
 $conection = DB::getInstance();
 
-$ok = login($conection, $_POST["username"], $_POST["password"]);//son las variables del formulario
+$ok = login($conection, $_POST["username"], $_POST["password"]);
 
 if ($ok) {
-    $_SESSION["username"] = $_POST["username"];
-    include __DIR__ . '/../views/login_ok.php';
+    // Si el usuario es administrador, redirigir al panel de administración
+    if (esAdmin()) {
+        header("Location: index.php?action=Pagina-administracion");
+        exit();
+    } else {
+        // Si es un usuario normal, redirigir a la página principal
+        header("Location: index.php");
+        exit();
+    }
 } else {
-    $error = "Usuari o contrasenya incorrectes";
+    $error = "Usuario o contraseña incorrectos";
     include __DIR__ . '/../views/login_bad.php';
 }
-
 ?>

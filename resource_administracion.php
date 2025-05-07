@@ -4,10 +4,11 @@
 // Cargar dependencias
 require_once __DIR__ . '/model/connectaDB.php';
 require_once __DIR__ . '/model/usuarios.php';
+// require_once __DIR__ . '/controller/admin/admin_controller.php'; // Eliminada para evitar doble inclusión
 
 // VERIFICACIÓN DE PERMISOS
 if (!estaLogueado() || !esAdmin()) {
-    header("Location: ?action=pagina-login");
+    header("Location: index.php?action=pagina-login");
     exit();
 }
 
@@ -18,32 +19,28 @@ $pageTitle = 'Panel de Administración - Tienda Deportiva';
 ob_start();
 
 // ROUTING INTERNO DE ADMINISTRACIÓN
-$adminAction = $_GET['admin_action'] ?? 'dashboard';
+$subaction = $_GET['subaction'] ?? 'dashboard';
 
-switch ($adminAction) {
-    case 'productos':
-        include __DIR__ . '/views/admin/productos.php';
-        break;
-    case 'usuarios':
-        include __DIR__ . '/views/admin/usuarios.php';
-        break;
-    case 'categorias':
-        include __DIR__ . '/views/admin/categorias.php';
-        break;
-    case 'pedidos':
-        include __DIR__ . '/views/admin/pedidos.php';
-        break;
-    case 'home_content':
-        include __DIR__ . '/views/admin/home_content.php';
+switch ($subaction) {
+    case 'crear-producto':
+    case 'editar-producto':
+    case 'eliminar-producto':
+    case 'listar-productos':
+        include __DIR__ . '/controller/admin/productos_controller.php';
         break;
     default:
-        include __DIR__ . '/views/admin/dashboard.php';
+        include __DIR__ . '/controller/admin/admin_controller.php';
         break;
 }
 
 // Obtener el contenido del buffer
 $content = ob_get_clean();
 
-// Incluir el layout de administración
-require_once __DIR__ . '/views/layouts/admin.php';
+// Si hay contenido en el buffer, mostrarlo
+if ($content) {
+    echo $content;
+} else {
+    // Si no hay contenido, mostrar el panel por defecto
+    include __DIR__ . '/views/admin/panel.php';
+}
 ?> 
