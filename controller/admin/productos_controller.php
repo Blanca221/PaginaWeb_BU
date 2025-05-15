@@ -13,48 +13,49 @@ $mensaje = '';
 
 // Procesar formularios POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validación del lado del servidor
-    if (empty($_POST['nombre_producto'])) {
-        $errores[] = "El nombre del producto es obligatorio";
-    }
-    if (!isset($_POST['precio']) || !is_numeric($_POST['precio']) || $_POST['precio'] <= 0) {
-        $errores[] = "El precio debe ser un número mayor que 0";
-    }
-    if (!isset($_POST['stock']) || !is_numeric($_POST['stock']) || $_POST['stock'] < 0) {
-        $errores[] = "El stock debe ser un número no negativo";
-    }
-    if (empty($_POST['id_categoria'])) {
-        $errores[] = "La categoría es obligatoria";
-    }
-    
-    // Si no hay errores, procesar la acción
-    if (empty($errores)) {
-        switch ($subaction) {
-            case 'crear-producto':
-                if (crearProducto($conection, $_POST)) {
-                    $mensaje = "Producto creado exitosamente";
-                } else {
-                    $errores[] = "Error al crear el producto";
-                }
-                break;
-                
-            case 'editar-producto':
-                if (actualizarProducto($conection, $_POST)) {
-                    $mensaje = "Producto actualizado exitosamente";
-                } else {
-                    $errores[] = "Error al actualizar el producto";
-                }
-                break;
-                
-            case 'eliminar-producto':
-                if (eliminarProducto($conection, $_POST['id_producto'])) {
-                    $mensaje = "Producto eliminado exitosamente";
-                    header('Location: index.php?action=Pagina-administracion');
-                    exit();
-                } else {
-                    $errores[] = "Error al eliminar el producto";
-                }
-                break;
+    // Si es eliminar, no validar nada más
+    if ($subaction === 'eliminar-producto' && isset($_POST['id_producto'])) {
+        if (eliminarProducto($conection, $_POST['id_producto'])) {
+            $mensaje = "Producto eliminado exitosamente";
+            header('Location: index.php?action=Pagina-administracion');
+            exit();
+        } else {
+            $errores[] = "Error al eliminar el producto";
+        }
+    } else {
+        // Validación del lado del servidor SOLO para crear/editar
+        if (empty($_POST['nombre_producto'])) {
+            $errores[] = "El nombre del producto es obligatorio";
+        }
+        if (!isset($_POST['precio']) || !is_numeric($_POST['precio']) || $_POST['precio'] <= 0) {
+            $errores[] = "El precio debe ser un número mayor que 0";
+        }
+        if (!isset($_POST['stock']) || !is_numeric($_POST['stock']) || $_POST['stock'] < 0) {
+            $errores[] = "El stock debe ser un número no negativo";
+        }
+        if (empty($_POST['id_categoria'])) {
+            $errores[] = "La categoría es obligatoria";
+        }
+        
+        // Si no hay errores, procesar la acción
+        if (empty($errores)) {
+            switch ($subaction) {
+                case 'crear-producto':
+                    if (crearProducto($conection, $_POST)) {
+                        $mensaje = "Producto creado exitosamente";
+                    } else {
+                        $errores[] = "Error al crear el producto";
+                    }
+                    break;
+                    
+                case 'editar-producto':
+                    if (actualizarProducto($conection, $_POST)) {
+                        $mensaje = "Producto actualizado exitosamente";
+                    } else {
+                        $errores[] = "Error al actualizar el producto";
+                    }
+                    break;
+            }
         }
     }
 }
