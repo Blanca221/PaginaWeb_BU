@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../model/productos.php';
 require_once __DIR__ . '/../../model/connectaDB.php';
+require_once __DIR__ . '/../../model/productos.php';
 $conection = DB::getInstance();
 
 if (!esAdmin()) {
@@ -48,13 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     break;
                     
-                case 'editar-producto':
-                    if (actualizarProducto($conection, $_POST)) {
-                        $mensaje = "Producto actualizado exitosamente";
-                    } else {
-                        $errores[] = "Error al actualizar el producto";
-                    }
-                    break;
+                    case 'editar-producto':
+                        if (actualizarProducto($conection, $_POST)) {
+                            header('Location: index.php?action=Pagina-administracion&subaction=listar-productos');
+                            exit();
+                        } else {
+                            $errores[] = "Error al actualizar el producto";
+                        }
+                        break;
             }
         }
     }
@@ -73,7 +74,7 @@ switch ($subaction) {
     case 'editar-producto':
         $id_producto = $_GET['id'] ?? null;
         if ($id_producto) {
-            $producto = obtenerProducto($conection, $id_producto);
+            $producto = getProductById($conection, $id_producto);
             if ($producto) {
                 include __DIR__ . '/../../views/admin/productos/editar.php';
             } else {
