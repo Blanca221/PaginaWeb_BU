@@ -14,6 +14,20 @@
  */
 function agregarAlCarrito($conection, $id_cliente, $id_producto, $cantidad = 1) {
     try {
+        // Verificar que los parámetros sean válidos
+        if (!$id_cliente || !$id_producto || $cantidad <= 0) {
+            return false;
+        }
+        
+        // Verificar si el producto existe
+        $consulta_producto = $conection->prepare("SELECT id_producto FROM producto WHERE id_producto = ?");
+        $consulta_producto->bindParam(1, $id_producto, PDO::PARAM_INT);
+        $consulta_producto->execute();
+        
+        if (!$consulta_producto->fetch()) {
+            return false; // El producto no existe
+        }
+        
         // Verificar si ya existe en el carrito
         $consulta = $conection->prepare("SELECT cantidad FROM carrito WHERE id_cliente = ? AND id_producto = ?");
         $consulta->bindParam(1, $id_cliente, PDO::PARAM_INT);
@@ -35,8 +49,16 @@ function agregarAlCarrito($conection, $id_cliente, $id_producto, $cantidad = 1) 
             $consulta->bindParam(3, $cantidad, PDO::PARAM_INT);
         }
         
-        return $consulta->execute();
+        $resultado = $consulta->execute();
+        
+        if (!$resultado) {
+            // Para depuración
+            error_log("Error al agregar al carrito: " . print_r($consulta->errorInfo(), true));
+        }
+        
+        return $resultado;
     } catch(PDOException $e) {
+        error_log("Excepción al agregar al carrito: " . $e->getMessage());
         return false;
     }
 }
@@ -69,19 +91,27 @@ function eliminarDelCarrito($conection, $id_cliente, $id_producto) {
  */
 function obtenerCarrito($conection, $id_cliente) {
     try {
+        // Verificar que el cliente exista
+        if (!$id_cliente) {
+            return [];
+        }
+        
         $consulta = $conection->prepare("
             SELECT c.id_producto, c.cantidad, p.nombre_producto, p.precio, 
                    (p.precio * c.cantidad) as subtotal,
                    pi.url_imagen
             FROM carrito c
             JOIN producto p ON c.id_producto = p.id_producto
-            LEFT JOIN producto_imagenes pi ON p.id_producto = pi.id_producto AND pi.es_principal = 1
+            LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto AND (pi.es_principal = TRUE OR pi.es_principal IS NULL)
             WHERE c.id_cliente = ?
+            GROUP BY c.id_producto
         ");
         $consulta->bindParam(1, $id_cliente, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e) {
+        // Para depuración, puedes descomentar la siguiente línea
+        // echo "Error en obtenerCarrito: " . $e->getMessage();
         return [];
     }
 }

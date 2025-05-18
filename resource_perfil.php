@@ -36,22 +36,22 @@ ob_start();
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p><strong>Nombre de Usuario:</strong> <?php echo htmlspecialchars($usuario['username']); ?></p>
-                                    <p><strong>Nombre:</strong> <?php echo htmlspecialchars($usuario['first_name']); ?></p>
-                                    <p><strong>Apellido:</strong> <?php echo htmlspecialchars($usuario['second_name']); ?></p>
-                                    <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
+                                    <p><strong>Nombre de Usuario:</strong> <?php echo isset($usuario['username']) ? htmlspecialchars($usuario['username']) : ''; ?></p>
+                                    <p><strong>Nombre:</strong> <?php echo isset($usuario['first_name']) ? htmlspecialchars($usuario['first_name']) : ''; ?></p>
+                                    <p><strong>Apellido:</strong> <?php echo isset($usuario['second_name']) ? htmlspecialchars($usuario['second_name']) : ''; ?></p>
+                                    <p><strong>Email:</strong> <?php echo isset($usuario['email']) ? htmlspecialchars($usuario['email']) : ''; ?></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><strong>Dirección:</strong> <?php echo htmlspecialchars($usuario['direccion']); ?></p>
-                                    <p><strong>Código Postal:</strong> <?php echo htmlspecialchars($usuario['postal']); ?></p>
-                                    <p><strong>Teléfono:</strong> <?php echo htmlspecialchars($usuario['telefono']); ?></p>
-                                    <p><strong>Tipo de Cuenta:</strong> <?php echo ucfirst(htmlspecialchars($usuario['rol'])); ?></p>
+                                    <p><strong>Dirección:</strong> <?php echo isset($usuario['direccion']) ? htmlspecialchars($usuario['direccion']) : ''; ?></p>
+                                    <p><strong>Código Postal:</strong> <?php echo isset($usuario['postal']) ? htmlspecialchars($usuario['postal']) : ''; ?></p>
+                                    <p><strong>Teléfono:</strong> <?php echo isset($usuario['telefono']) ? htmlspecialchars($usuario['telefono']) : ''; ?></p>
+                                    <p><strong>Tipo de Cuenta:</strong> <?php echo isset($usuario['rol']) ? ucfirst(htmlspecialchars($usuario['rol'])) : ''; ?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <?php if ($usuario['rol'] === 'administrador'): ?>
+                    <?php if (isset($usuario['rol']) && $usuario['rol'] === 'administrador'): ?>
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="alert alert-info">

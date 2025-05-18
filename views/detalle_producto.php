@@ -74,9 +74,6 @@
                                 <i class="fas fa-shopping-cart me-2"></i>Añadir al carrito
                             </button>
                         </form>
-                        <button class="btn btn-outline-dark w-100">
-                            <i class="fas fa-heart me-2"></i>Añadir a favoritos
-                        </button>
                     </div>
                 <?php else: ?>
                     <div class="alert alert-warning">

@@ -6,18 +6,58 @@
  * de productos, incluyendo consultas por categoría y listados generales.
  */
 
-function getProductsByCategory($conection, $categoria) { // Antiguo no usar tal cual (modificar)
-
+/**
+ * Obtiene productos por ID de categoría
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param int $id_categoria ID de la categoría
+ * @return array Lista de productos de la categoría
+ */
+function getProductsByCategory($conection, $id_categoria) {
     try {
-        $consulta = $conection->prepare("SELECT product_name, stock FROM PRODUCT WHERE category_id = ?");
-        $consulta->bindParam(1, $categoria, PDO::PARAM_INT);
+        // Si la categoría es de calzado (IDs 11, 14, 17), mostrar todos los productos de la categoría 1 (Zapatillas)
+        // para que aparezcan los mismos productos en todas las categorías de calzado
+        if (in_array($id_categoria, [11, 14, 17])) {
+            $consulta = $conection->prepare("
+                SELECT p.*, pi.url_imagen, m.nombre_marca, 
+                       (CASE 
+                           WHEN ? = 11 THEN 'Calzado de Hombre'
+                           WHEN ? = 14 THEN 'Calzado de Mujer'
+                           WHEN ? = 17 THEN 'Calzado de Niños'
+                           ELSE c.nombre_cat 
+                       END) as categoria_nombre
+                FROM producto p 
+                LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+                LEFT JOIN marca m ON p.id_marca = m.id_marca
+                LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
+                WHERE (pi.es_principal = TRUE OR pi.es_principal IS NULL)
+                AND p.id_categoria = 1 -- Categoría general de zapatillas
+                ORDER BY p.nombre_producto
+            ");
+            $consulta->bindParam(1, $id_categoria, PDO::PARAM_INT);
+            $consulta->bindParam(2, $id_categoria, PDO::PARAM_INT);
+            $consulta->bindParam(3, $id_categoria, PDO::PARAM_INT);
+        } else {
+            // Para otras categorías, mostrar solo los productos de esa categoría específica
+            $consulta = $conection->prepare("
+                SELECT p.*, pi.url_imagen, m.nombre_marca, c.nombre_cat as categoria_nombre
+                FROM producto p 
+                LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+                LEFT JOIN marca m ON p.id_marca = m.id_marca
+                LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
+                WHERE (pi.es_principal = TRUE OR pi.es_principal IS NULL)
+                AND p.id_categoria = ?
+                ORDER BY p.nombre_producto
+            ");
+            $consulta->bindParam(1, $id_categoria, PDO::PARAM_INT);
+        }
+        
         $consulta->execute();
-        $resultat = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
         echo "Error: " . $e->getMessage();
+        return [];
     }
-    
-    return $resultat;
 }
 
 /**
@@ -285,6 +325,39 @@ function obtenerMarcas($conection) {
     try {
         $consulta = $conection->prepare("SELECT id_marca, nombre_marca FROM marca WHERE estado = 'activo' ORDER BY nombre_marca");
         $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
+
+/**
+ * Busca productos por nombre o marca
+ *
+ * @param PDO $conection Conexión a la base de datos
+ * @param string $termino Término de búsqueda
+ * @return array Lista de productos que coinciden con la búsqueda
+ */
+function buscarProductos($conection, $termino) {
+    try {
+        // Preparar el término de búsqueda para usar en LIKE
+        $terminoBusqueda = "%" . $termino . "%";
+        
+        $consulta = $conection->prepare("
+            SELECT p.*, pi.url_imagen, m.nombre_marca 
+            FROM producto p 
+            LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+            LEFT JOIN marca m ON p.id_marca = m.id_marca
+            WHERE (pi.es_principal = TRUE OR pi.es_principal IS NULL)
+            AND (p.nombre_producto LIKE ? OR m.nombre_marca LIKE ?)
+            ORDER BY p.nombre_producto
+        ");
+        
+        $consulta->bindParam(1, $terminoBusqueda, PDO::PARAM_STR);
+        $consulta->bindParam(2, $terminoBusqueda, PDO::PARAM_STR);
+        $consulta->execute();
+        
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();

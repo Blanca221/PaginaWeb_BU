@@ -1,4 +1,7 @@
 <?php
+// Iniciar sesión para mantener el estado de login del usuario
+session_start();
+
 // RECURSO PARA LISTAR TODOS LOS PRODUCTOS DE LA TIENDA
 
 // Definir el título de la página
