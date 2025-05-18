@@ -69,7 +69,7 @@
                                     <a class="nav-link" href="/PaginaWeb_BU/index.php?action=categoria-ninos">NIÑOS</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/PaginaWeb_BU/resource_productos.php?categoria=ofertas">OFERTAS</a>
+                                    <a class="nav-link" href="/PaginaWeb_BU/index.php?action=ofertas">OFERTAS</a>
                                 </li>
                             </ul>
                         </div>
@@ -100,13 +100,24 @@
                                 <?php endif; ?>
                             </ul>
                         </div>
-                        <a href="#" class="position-relative">
+                        <a href="/PaginaWeb_BU/index.php?action=carrito" class="position-relative">
                             <i class="fas fa-shopping-cart"></i>
-                            <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
-                                    <?php echo count($_SESSION['cart']); ?>
+                            <?php 
+                            // Mostrar contador si el usuario está logueado
+                            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                                require_once __DIR__ . '/../../model/connectaDB.php';
+                                require_once __DIR__ . '/../../model/carrito.php';
+                                $conection = DB::getInstance();
+                                $num_productos = contarProductosCarrito($conection, $_SESSION['id_cliente']);
+                                if($num_productos > 0): 
+                            ?>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <?php echo $num_productos; ?>
                                 </span>
-                            <?php endif; ?>
+                            <?php 
+                                endif;
+                            } 
+                            ?>
                         </a>
                         <?php
                         require_once __DIR__ . '/../../model/usuarios.php';

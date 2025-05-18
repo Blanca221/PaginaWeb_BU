@@ -74,6 +74,46 @@ switch ($action) {
     case 'perfil':
         include __DIR__ . '/resource_perfil.php';
         break;
+        
+    // MÓDULO DE CARRITO
+    case 'carrito':
+        include __DIR__ . '/resource_carrito.php';
+        break;
+        
+    case 'checkout':
+        // Definir el título de la página
+        $pageTitle = 'Pedido Confirmado';
+        
+        // Iniciar el buffer de salida
+        ob_start();
+        
+        // Incluir la vista directamente
+        require_once __DIR__ . '/views/checkout.php';
+        
+        // Obtener el contenido del buffer
+        $content = ob_get_clean();
+        
+        // Incluir el layout principal
+        require_once __DIR__ . '/views/layouts/main.php';
+        break;
+        
+    // MÓDULO DE OFERTAS
+    case 'ofertas':
+        // Definir el título de la página
+        $pageTitle = 'Ofertas - Tienda Deportiva';
+        
+        // Iniciar el buffer de salida
+        ob_start();
+        
+        // Incluir el controlador
+        require_once __DIR__ . '/controller/mostrar_ofertas.php';
+        
+        // Obtener el contenido del buffer
+        $content = ob_get_clean();
+        
+        // Incluir el layout principal
+        require_once __DIR__ . '/views/layouts/main.php';
+        break;
 
     // PORTADA (DEFAULT)
     default:

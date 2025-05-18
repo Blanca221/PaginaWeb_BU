@@ -14,7 +14,7 @@
         <div class="col">
             <div class="card h-100 producto-card shadow-sm">
                 <!-- Card -->
-                <a href="/PaginaWeb_BU/resource_detalle_producto.php?id=<?php echo $producto['id_producto']; ?>" 
+                <a href="/PaginaWeb_BU/index.php?action=detalle-producto&id=<?php echo $producto['id_producto']; ?>" 
                    class="text-decoration-none">
                     <?php if (!empty($producto['url_imagen'])) : ?>
                         <img class="card-img-top producto-imagen" 
@@ -39,9 +39,23 @@
                     </div>
                 </a>
                 <div class="card-footer bg-white border-top-0">
-                    <button class="btn btn-primary w-100">
-                        <i class="fas fa-shopping-cart me-2"></i>Añadir al carrito
-                    </button>
+                    <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $producto['stock'] > 0): ?>
+                        <form action="index.php?action=carrito&accion=agregar" method="post">
+                            <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
+                            <input type="hidden" name="cantidad" value="1">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-shopping-cart me-2"></i>Añadir al carrito
+                            </button>
+                        </form>
+                    <?php elseif($producto['stock'] <= 0): ?>
+                        <button class="btn btn-secondary w-100" disabled>
+                            <i class="fas fa-times me-2"></i>Agotado
+                        </button>
+                    <?php else: ?>
+                        <a href="index.php?action=pagina-login" class="btn btn-primary w-100">
+                            <i class="fas fa-sign-in-alt me-2"></i>Iniciar sesión para comprar
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

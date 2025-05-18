@@ -67,9 +67,13 @@
                             <?php endfor; ?>
                         </select>
 
-                        <button class="btn btn-dark w-100 mb-3">
-                            <i class="fas fa-shopping-cart me-2"></i>Añadir al carrito
-                        </button>
+                        <form action="index.php?action=carrito&accion=agregar" method="post">
+                            <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
+                            <input type="hidden" name="cantidad" value="1">
+                            <button type="submit" class="btn btn-dark w-100 mb-3">
+                                <i class="fas fa-shopping-cart me-2"></i>Añadir al carrito
+                            </button>
+                        </form>
                         <button class="btn btn-outline-dark w-100">
                             <i class="fas fa-heart me-2"></i>Añadir a favoritos
                         </button>
