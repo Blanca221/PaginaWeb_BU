@@ -97,16 +97,16 @@ switch ($action) {
         require_once __DIR__ . '/views/layouts/main.php';
         break;
         
-    // MÓDULO DE OFERTAS
-    case 'ofertas':
+    // MÓDULO DE NOVEDADES
+    case 'novedades':
         // Definir el título de la página
-        $pageTitle = 'Ofertas - Tienda Deportiva';
+        $pageTitle = 'Novedades - Tienda Deportiva';
         
         // Iniciar el buffer de salida
         ob_start();
         
         // Incluir el controlador
-        require_once __DIR__ . '/controller/mostrar_ofertas.php';
+        require_once __DIR__ . '/controller/mostrar_novedades.php';
         
         // Obtener el contenido del buffer
         $content = ob_get_clean();

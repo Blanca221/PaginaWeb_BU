@@ -26,7 +26,7 @@
                 <h2 class="mb-4">Categorías</h2>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="h4 fw-normal">Descubre todas nuestras subcategorías</div>
-                    <a href="/PaginaWeb_BU/resource_productos.php?categoria=mujer" class="text-decoration-none text-dark">Ver Todo</a>
+                    <a href="/PaginaWeb_BU/index.php?action=novedades" class="text-decoration-none text-dark">Ver Todo</a>
                 </div>
             </div>
         </div>

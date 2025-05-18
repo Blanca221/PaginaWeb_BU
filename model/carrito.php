@@ -53,7 +53,7 @@ function agregarAlCarrito($conection, $id_cliente, $id_producto, $cantidad = 1) 
         
         if (!$resultado) {
             // Para depuración
-            error_log("Error al agregar al carrito: " . print_r($consulta->errorInfo(), true));
+            error_log("Error al agregar al carrito: " . json_encode($consulta->errorInfo()));
         }
         
         return $resultado;

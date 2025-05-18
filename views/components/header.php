@@ -69,7 +69,7 @@
                                     <a class="nav-link" href="/PaginaWeb_BU/index.php?action=categoria-ninos">NIÑOS</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/PaginaWeb_BU/index.php?action=ofertas">OFERTAS</a>
+                                    <a class="nav-link" href="/PaginaWeb_BU/index.php?action=novedades">NOVEDADES</a>
                                 </li>
                             </ul>
                         </div>

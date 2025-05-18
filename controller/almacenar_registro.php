@@ -25,9 +25,10 @@ require_once __DIR__ . '/../model/usuarios.php';
 
 if (isset($_POST['username']) &&
     isset($_POST['password']) &&
+    isset($_POST['confirm_password']) &&
     isset($_POST['first_name']) &&
     isset($_POST['email']) &&
-    isset($_POST['postal_code']) &&
+    isset($_POST['postal']) &&
     isset($_POST['pregunta_seguridad']) &&
     isset($_POST['respuesta_seguridad'])
     ) {
@@ -36,10 +37,11 @@ if (isset($_POST['username']) &&
         strlen($_POST['username']) <= 20 &&
         strlen($_POST['password']) >= 4 &&
         strlen($_POST['password']) <= 20 &&
+        $_POST['password'] === $_POST['confirm_password'] &&
         strlen($_POST['first_name']) >= 4 &&
         strlen($_POST['first_name']) <= 40 &&
         filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) &&
-        strlen($_POST['postal_code']) == 5)
+        strlen($_POST['postal']) == 5)
         ) {
         
         $_SESSION['username'] = $_POST['username'];
@@ -48,7 +50,7 @@ if (isset($_POST['username']) &&
         $_SESSION['second_name'] = $_POST['second_name'];
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['direccion'] = $_POST['direccion'];
-        $_SESSION['postal_code'] = $_POST['postal_code'];
+        $_SESSION['postal_code'] = $_POST['postal'];
         $_SESSION['telefono'] = $_POST['telefono'];
         $_SESSION['pregunta_seguridad'] = $_POST['pregunta_seguridad'];
         $_SESSION['respuesta_seguridad'] = $_POST['respuesta_seguridad'];

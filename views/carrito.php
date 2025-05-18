@@ -3,7 +3,7 @@
     
     <?php if (empty($productos_carrito)): ?>
         <div class="alert alert-info">
-            <p>Tu carrito está vacío. <a href="index.php?action=ofertas" class="alert-link">Continuar comprando</a></p>
+            <p>Tu carrito está vacío. <a href="index.php?action=novedades" class="alert-link">Continuar comprando</a></p>
         </div>
     <?php else: ?>
         <div class="table-responsive">
@@ -32,7 +32,7 @@
                             <td><?php echo $producto['cantidad']; ?></td>
                             <td>€<?php echo number_format($producto['subtotal'], 2, ',', '.'); ?></td>
                             <td>
-                                <a href="index.php?action=carrito&accion=eliminar&id=<?php echo $producto['id_producto']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este producto?')">
+                                <a href="index.php?action=carrito&accion=eliminar&id=<?php echo $producto['id_producto']; ?>" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -50,7 +50,7 @@
         </div>
         
         <div class="d-flex justify-content-between mt-4">
-            <a href="index.php?action=ofertas" class="btn btn-outline-primary">
+            <a href="index.php?action=novedades" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left me-2"></i>Seguir comprando
             </a>
             <a href="index.php?action=checkout" class="btn btn-success">
