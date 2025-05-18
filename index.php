@@ -70,6 +70,11 @@ switch ($action) {
         include __DIR__.'/resource_administracion.php';
         break;
 
+    // MÓDULO DE PERFIL
+    case 'perfil':
+        include __DIR__ . '/resource_perfil.php';
+        break;
+
     // PORTADA (DEFAULT)
     default:
         include __DIR__.'/resource_portada.php';
