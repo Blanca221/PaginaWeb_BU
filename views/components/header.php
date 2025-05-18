@@ -93,8 +93,7 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=pagina-login">Iniciar Sesión</a></li>
                                 <?php else: ?>
-                                    <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=perfil">Mi Perfil</a></li>
-                                    <li><a class="dropdown-item" href="#">Mis Pedidos</a></li>
+                                    <li><a class="dropdown-item" href="index.php?action=perfil">Mi Perfil</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="/PaginaWeb_BU/index.php?action=cerrar-sesion">Cerrar Sesión</a></li>
                                 <?php endif; ?>

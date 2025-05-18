@@ -1,3 +1,18 @@
+<?php
+// Iniciar sesión si no está iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Variable para almacenar mensajes de error
+$error_message = $_SESSION['login_error'] ?? '';
+
+// Limpiar el mensaje de error después de mostrarlo
+if (isset($_SESSION['login_error'])) {
+    unset($_SESSION['login_error']);
+}
+?>
+
 <!--Ejercicio [11]
     Crea una pagina para iniciar sesion y que sea funcional. Tienes que comprobar si el usuario y la password corresponde con las
         que hayas creado anteriormente.
@@ -16,6 +31,12 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Iniciar Sesión</h2>
+                        
+                        <?php if (!empty($error_message)): ?>
+                            <div class="alert alert-danger mb-3" role="alert">
+                                <?php echo $error_message; ?>
+                            </div>
+                        <?php endif; ?>
                         <form action="?action=inicio-session" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de usuario</label>

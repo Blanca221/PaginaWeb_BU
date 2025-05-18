@@ -69,15 +69,31 @@ if (isset($_POST['username']) &&
             $_SESSION['respuesta_seguridad'] ?? null
         );
         if ($registre) {
-            $mensaje = "Registro correcto";
+            // Iniciar sesión automáticamente después del registro
+            $login_ok = login($conection, $_SESSION['username'], $_POST['password']);
+            if ($login_ok) {
+                // Redirigir a la página principal
+                header("Location: index.php");
+                exit();
+            } else {
+                $_SESSION['registro_error'] = "Registro correcto pero hubo un problema al iniciar sesión automáticamente. Por favor, inicie sesión manualmente.";
+                header("Location: index.php?action=pagina-login");
+                exit();
+            }
         } else {
-            $mensaje = "Error en el registro al almacenar en la base de datos.";
+            $_SESSION['registro_error'] = "Error en el registro al almacenar en la base de datos.";
+            header("Location: index.php?action=pagina-registro");
+            exit();
         }
     } else {
-        $mensaje = "Error en el registro, los campos no cumplen los requisitos.";
+        $_SESSION['registro_error'] = "Error en el registro, los campos no cumplen los requisitos.";
+        header("Location: index.php?action=pagina-registro");
+        exit();
     }
 } else {
-    $mensaje = "Error en el registro, faltan campos.";
+    $_SESSION['registro_error'] = "Error en el registro, faltan campos.";
+    header("Location: index.php?action=pagina-registro");
+    exit();
 }
 
 /**

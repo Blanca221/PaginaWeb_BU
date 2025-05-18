@@ -1,3 +1,18 @@
+<?php
+// Iniciar sesión si no está iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Variable para almacenar mensajes de error
+$error_message = $_SESSION['registro_error'] ?? '';
+
+// Limpiar el mensaje de error después de mostrarlo
+if (isset($_SESSION['registro_error'])) {
+    unset($_SESSION['registro_error']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,6 +45,12 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Crear cuenta nueva</h2>
+                        
+                        <?php if (!empty($error_message)): ?>
+                            <div class="alert alert-danger mb-3" role="alert">
+                                <?php echo $error_message; ?>
+                            </div>
+                        <?php endif; ?>
                         <form action="?action=registre-session" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nombre de usuario</label>

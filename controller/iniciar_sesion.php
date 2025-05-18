@@ -33,7 +33,11 @@ if ($ok) {
         exit();
     }
 } else {
-    $error = "Usuario o contraseña incorrectos";
-    include __DIR__ . '/../views/login_bad.php';
+    // Guardar el mensaje de error en la sesión
+    $_SESSION['login_error'] = "Usuario o contraseña incorrectos";
+    
+    // Redirigir de vuelta a la página de login
+    header("Location: index.php?action=pagina-login");
+    exit();
 }
 ?>
