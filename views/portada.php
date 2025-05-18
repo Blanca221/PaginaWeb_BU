@@ -2,32 +2,47 @@
 <section class="hero-section position-relative">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <?php foreach ($heroes as $index => $hero): ?>
-                <button type="button" 
-                        data-bs-target="#heroCarousel" 
-                        data-bs-slide-to="<?php echo $index; ?>" 
-                        class="<?php echo $index === 0 ? 'active' : ''; ?>"
-                        aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>"
-                        aria-label="Slide <?php echo $index + 1; ?>">
-                </button>
-            <?php endforeach; ?>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-current="false" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-current="false" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-            <?php foreach ($heroes as $index => $hero): ?>
-                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                    <div class="hero-slide">
-                        <img src="<?php echo htmlspecialchars($hero['url_imagen_completa']); ?>" 
-                             alt="<?php echo htmlspecialchars($hero['titulo']); ?>">
-                        <div class="carousel-caption">
-                            <h1 class="hero-title"><?php echo htmlspecialchars($hero['titulo']); ?></h1>
-                            <p class="hero-subtitle"><?php echo htmlspecialchars($hero['subtitulo']); ?></p>
-                            <a href="<?php echo htmlspecialchars($hero['url_enlace']); ?>" class="btn hero-btn">
-                                COMPRAR AHORA
-                            </a>
-                        </div>
+            <div class="carousel-item active">
+                <div class="hero-slide">
+                    <img src="/PaginaWeb_BU/public/imagenes/home/hero-principal1.png" alt="Imagen Principal 1">
+                    <div class="carousel-caption">
+                        <h1 class="hero-title">Colección Deportiva</h1>
+                        <p class="hero-subtitle">Descubre nuestras novedades</p>
+                        <a href="/PaginaWeb_BU/index.php?action=ofertas" class="btn hero-btn">
+                            COMPRAR AHORA
+                        </a>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide">
+                    <img src="/PaginaWeb_BU/public/imagenes/home/hero-principal2.png" alt="Imagen Principal 2">
+                    <div class="carousel-caption">
+                        <h1 class="hero-title">Rendimiento Deportivo</h1>
+                        <p class="hero-subtitle">Equipamiento de alta calidad</p>
+                        <a href="/PaginaWeb_BU/index.php?action=ofertas" class="btn hero-btn">
+                            COMPRAR AHORA
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide">
+                    <img src="/PaginaWeb_BU/public/imagenes/home/hero-principal3.png" alt="Imagen Principal 3">
+                    <div class="carousel-caption">
+                        <h1 class="hero-title">Estilo y Confort</h1>
+                        <p class="hero-subtitle">Para todos los deportes</p>
+                        <a href="/PaginaWeb_BU/index.php?action=ofertas" class="btn hero-btn">
+                            COMPRAR AHORA
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>

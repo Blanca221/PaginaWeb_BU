@@ -27,11 +27,11 @@ function getProductsByCategory($conection, $id_categoria) {
                            ELSE c.nombre_cat 
                        END) as categoria_nombre
                 FROM producto p 
-                LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+                LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto AND (pi.es_principal = TRUE OR pi.es_principal IS NULL)
                 LEFT JOIN marca m ON p.id_marca = m.id_marca
                 LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
-                WHERE (pi.es_principal = TRUE OR pi.es_principal IS NULL)
-                AND p.id_categoria = 1 -- Categoría general de zapatillas
+                WHERE p.id_categoria = 1 AND p.estado = 'activo'
+                GROUP BY p.id_producto
                 ORDER BY p.nombre_producto
             ");
             $consulta->bindParam(1, $id_categoria, PDO::PARAM_INT);
@@ -42,11 +42,11 @@ function getProductsByCategory($conection, $id_categoria) {
             $consulta = $conection->prepare("
                 SELECT p.*, pi.url_imagen, m.nombre_marca, c.nombre_cat as categoria_nombre
                 FROM producto p 
-                LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto 
+                LEFT JOIN Producto_Imagenes pi ON p.id_producto = pi.id_producto AND (pi.es_principal = TRUE OR pi.es_principal IS NULL)
                 LEFT JOIN marca m ON p.id_marca = m.id_marca
                 LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
-                WHERE (pi.es_principal = TRUE OR pi.es_principal IS NULL)
-                AND p.id_categoria = ?
+                WHERE p.id_categoria = ? AND p.estado = 'activo'
+                GROUP BY p.id_producto
                 ORDER BY p.nombre_producto
             ");
             $consulta->bindParam(1, $id_categoria, PDO::PARAM_INT);
@@ -55,7 +55,7 @@ function getProductsByCategory($conection, $id_categoria) {
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
-        echo "Error: " . $e->getMessage();
+        error_log("Error en getProductsByCategory: " . $e->getMessage());
         return [];
     }
 }

@@ -3,7 +3,7 @@
     
     <?php if (empty($productos_carrito)): ?>
         <div class="alert alert-info">
-            <p>Tu carrito está vacío. <a href="index.php?action=pagina-productos" class="alert-link">Continuar comprando</a></p>
+            <p>Tu carrito está vacío. <a href="index.php?action=ofertas" class="alert-link">Continuar comprando</a></p>
         </div>
     <?php else: ?>
         <div class="table-responsive">
@@ -50,7 +50,7 @@
         </div>
         
         <div class="d-flex justify-content-between mt-4">
-            <a href="index.php?action=pagina-productos" class="btn btn-outline-primary">
+            <a href="index.php?action=ofertas" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-left me-2"></i>Seguir comprando
             </a>
             <a href="index.php?action=checkout" class="btn btn-success">

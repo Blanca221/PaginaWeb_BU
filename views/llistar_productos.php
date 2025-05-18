@@ -1,4 +1,4 @@
-<!-- Título de la página de productos -->
+<!-- Vista de listado de productos -->
 <div class="container py-4">
     
     <?php if (isset($tituloPagina)): ?>
@@ -10,45 +10,46 @@
     <?php if (isset($terminoBusqueda) && !empty($terminoBusqueda) && empty($productos)): ?>
         <div class="alert alert-info">
             No se encontraron resultados para "<?php echo htmlspecialchars($terminoBusqueda); ?>". 
-            <a href="/PaginaWeb_BU/resource_productos.php" class="alert-link">Ver todos los productos</a>.
         </div>
     <?php endif; ?>
     
     <div class="row product-cards">
     <?php if (!empty($productos)): ?>
-    <?php foreach ($productos as $producto) : ?>
-        <div class="col-md-3 mb-4">
-            <div class="product-card">
-                <a href="/PaginaWeb_BU/index.php?action=detalle-producto&id=<?php echo $producto['id_producto']; ?>" class="product-link">
-                    <div class="product-image">
-                        <?php if (!empty($producto['url_imagen'])) : ?>
-                            <img src="/PaginaWeb_BU/public/<?php echo htmlspecialchars($producto['url_imagen']) ?>" 
-                                alt="<?php echo htmlspecialchars($producto['nombre_producto']) ?>">
-                        <?php else : ?>
-                            <div class="no-image">
-                                <i class="fas fa-image fa-3x"></i>
+        <?php foreach ($productos as $producto) : ?>
+            <div class="col-md-3 mb-4">
+                <div class="product-card">
+                    <a href="/PaginaWeb_BU/index.php?action=detalle-producto&id=<?php echo intval($producto['id_producto']); ?>" class="product-link">
+                        <div class="product-image">
+                            <?php if (!empty($producto['url_imagen'])) : ?>
+                                <img src="/PaginaWeb_BU/public/<?php echo htmlspecialchars($producto['url_imagen']) ?>" 
+                                    alt="<?php echo htmlspecialchars($producto['nombre_producto']) ?>">
+                            <?php else : ?>
+                                <div class="no-image">
+                                    <i class="fas fa-image fa-3x"></i>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="product-info">
+                            <div class="brand-name">
+                                <?php echo isset($producto['nombre_marca']) ? htmlspecialchars($producto['nombre_marca']) : ''; ?>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <div class="product-info">
-                        <div class="brand-name">
-                            <?php echo isset($producto['nombre_marca']) ? htmlspecialchars($producto['nombre_marca']) : ''; ?>
+                            <div class="product-name">
+                                <?php echo htmlspecialchars($producto['nombre_producto']); ?>
+                            </div>
+                            <div class="product-price">
+                                €<?php echo number_format(floatval($producto['precio']), 2) ?>
+                            </div>
                         </div>
-                        <div class="product-name">
-                            <?php echo htmlspecialchars($producto['nombre_producto']); ?>
-                        </div>
-                        <div class="product-price">
-                            €<?php echo number_format($producto['precio'], 2) ?>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     <?php else: ?>
         <div class="col-12">
-            <p>No hay productos disponibles.</p>
+            <div class="alert alert-info">
+                No hay productos disponibles.
+            </div>
         </div>
     <?php endif; ?>
     </div>
